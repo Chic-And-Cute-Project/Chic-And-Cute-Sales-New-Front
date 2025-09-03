@@ -1,1 +1,15 @@
-<router-outlet />
+<div style="display: flex; flex-direction: column; height: 100vh">
+  <mat-toolbar style="background-color: #eae3db; flex: 0 0 auto;">
+    <div style="flex: 1;"></div>
+    <div style="flex: 1; display: flex; justify-content: center; height: 100%;">
+      <img src="/logo.png" alt="Logo">
+    </div>
+    <div style="flex: 1;text-align: end;">
+      <p style="margin: 0; color: #d1ae6f">{{name}}</p>
+      <p style="margin: 0; color: #d1ae6f">{{branch}}</p>
+    </div>
+  </mat-toolbar>
+  <div style="flex: 1 1 auto;">
+    <router-outlet/>
+  </div>
+</div>
