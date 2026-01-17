@@ -4,8 +4,10 @@
       @for (m of data.messages; track m) {
         <p style="margin: 0">{{ m }}</p>
       }
-    } @else {
+    } @else if (data.messages) {
       <p style="margin: 0">{{ data.messages }}</p>
+    } @else {
+      <p style="margin: 0">Ha ocurrido un error</p>
     }
   </div>
   <div style="display: flex; align-items: center;">

@@ -13,13 +13,21 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
+import { HomePrincipal } from './core/pages/home-principal/home-principal';
+import { HomeSuperadmin } from './core/pages/home-superadmin/home-superadmin';
+import { HomeAdmin } from './core/pages/home-admin/home-admin';
+import { HomeBranch } from './core/pages/home-branch/home-branch';
 
 @NgModule({
   declarations: [
     App,
     Login,
     PageNotFound,
-    ErrorSnackBar
+    ErrorSnackBar,
+    HomePrincipal,
+    HomeSuperadmin,
+    HomeAdmin,
+    HomeBranch
   ],
   imports: [
     BrowserModule,

@@ -13,20 +13,25 @@ import {ErrorMessage} from '../../../shared/models/error-message';
   styleUrl: './login.css'
 })
 export class Login {
+  loading: boolean = false;
+
   loginDto: LoginDto = {} as LoginDto;
 
   constructor(private loginService: LoginService, private snackBar: MatSnackBar,
               private router: Router) { }
 
   onSubmit() {
+    this.loading = true;
     this.snackBar.open('Iniciando sesión');
     this.loginService.login(this.loginDto).subscribe({
       next: (response) => {
+        this.loading = false;
         this.snackBar.dismiss();
         localStorage.setItem('token', response.token);
         this.router.navigate(['/home', response.role]).then();
       },
       error: (error: ErrorMessage) => {
+        this.loading = false;
         this.snackBar.openFromComponent(ErrorSnackBar, {
           data: {
             messages: error.message
