@@ -8,7 +8,7 @@ import {ErrorSnackBar} from "../../shared/pages/error-snack-bar/error-snack-bar"
 import {UserAuxService} from "../../shared/services/user-aux/user-aux.service";
 import {CommunicationService} from "../../shared/services/communication/communication.service";
 
-export const tokenAndCorrectRoleGuard: CanActivateFn = (route) => {
+export const tokenCorrectRoleAndBranchValidatorGuard: CanActivateFn = (route) => {
   const router = inject(Router);
   const snackBar = inject(MatSnackBar);
   const userService = inject(UserService);
@@ -26,10 +26,12 @@ export const tokenAndCorrectRoleGuard: CanActivateFn = (route) => {
           if (role === roleParam) {
             if (role === 'ADMIN') {
               communicationService.emitTitleChange({ name: response.user.name + " " + response.user.lastName, branch: 'Administrador' });
-            } else if (role === 'SUPER_ADMIN') {
-              communicationService.emitTitleChange({ name: response.user.name + " " + response.user.lastName, branch: 'Super Administrador' });
             } else if (role === 'BRANCH') {
-              communicationService.emitTitleChange({ name: response.user.name + " " + response.user.lastName, branch: response.user.branch.name });
+              if (response.user.branch.name === 'Sin sede asignada') {
+                return router.createUrlTree(['/home', role]);
+              } else {
+                communicationService.emitTitleChange({ name: response.user.name + " " + response.user.lastName, branch: response.user.branch.name });
+              }
             }
             return true;
           } else {

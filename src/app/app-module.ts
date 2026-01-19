@@ -13,16 +13,19 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
-import { HomePrincipal } from './core/pages/home-principal/home-principal';
-import { HomeSuperadmin } from './core/pages/home-superadmin/home-superadmin';
-import { HomeAdmin } from './core/pages/home-admin/home-admin';
-import { HomeBranch } from './core/pages/home-branch/home-branch';
+import { HomePrincipal } from './core/pages/home/home-principal/home-principal';
+import { HomeSuperadmin } from './core/pages/home/home-superadmin/home-superadmin';
+import { HomeAdmin } from './core/pages/home/home-admin/home-admin';
+import { HomeBranch } from './core/pages/home/home-branch/home-branch';
 import { UsersBranches } from './admin/pages/users-branches/users-branches';
 import {MatSelectModule} from "@angular/material/select";
 import {MatIconModule} from "@angular/material/icon";
 import { AddUserDialog } from './admin/dialogs/add-user.dialog/add-user.dialog';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import { StockPrincipal } from './core/pages/stock-principal/stock-principal';
+import { StockAdmin } from './core/pages/stock-admin/stock-admin';
+import { StockBranch } from './core/pages/stock-branch/stock-branch';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
     HomeAdmin,
     HomeBranch,
     UsersBranches,
-    AddUserDialog
+    AddUserDialog,
+    StockPrincipal,
+    StockAdmin,
+    StockBranch
   ],
   imports: [
     BrowserModule,
