@@ -1,1 +1,19 @@
-<p>home-branch works!</p>
+<div style="display: flex; flex-direction: column; height: 100%">
+    <div style="flex: 1;"></div>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+        <h1 style="margin: 0; text-align: center;">Bienvenida</h1>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
+            <button mat-flat-button [routerLink]="['/sales-point', role]" style="margin-right: 10px; background-color: #eae3db; color: #d1ae6f">Punto de Venta</button>
+            <button mat-flat-button [routerLink]="['/stock', role]" style="margin-right: 10px; background-color: #eae3db; color: #d1ae6f">Stock</button>
+            <button mat-flat-button [routerLink]="['/reports', role]" style="margin-right: 10px; background-color: #eae3db; color: #d1ae6f">Reportes</button>
+            <button mat-flat-button [routerLink]="['/close-sales-day', role]" style="background-color: #eae3db; color: #d1ae6f">Cierre de Caja</button>
+            <button mat-flat-button [routerLink]="['/documents', role]" style="margin-right: 10px; background-color: #eae3db; color: #d1ae6f">Documentos</button>
+            <button mat-flat-button [routerLink]="['/stock-reception', role]" style="background-color: #eae3db; color: #d1ae6f">Recepción de Stock</button>
+        </div>
+    </div>
+    <div style="flex: 1; display: flex; justify-content: end; align-items: end">
+        <button matButton="filled" (click)="signOut()" style="background-color: #ff6464; margin: 0 15px 15px 0;">
+            Cerrar Sesión
+        </button>
+    </div>
+</div>

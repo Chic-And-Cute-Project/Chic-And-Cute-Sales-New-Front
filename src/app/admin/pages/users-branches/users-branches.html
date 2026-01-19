@@ -1,0 +1,75 @@
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
+    <h1>Vendedoras y Sedes</h1>
+    <div class="content">
+        <div style="width: 100%; display: flex; flex-direction: column; gap: 16px">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                    <mat-label>Nombre</mat-label>
+                    <input disabled matInput [(ngModel)]="userToUpdate.name">
+                </mat-form-field>
+                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                    <mat-label>Apellido</mat-label>
+                    <input disabled matInput [(ngModel)]="userToUpdate.lastName">
+                </mat-form-field>
+                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                    <mat-label>Usuario</mat-label>
+                    <input disabled matInput [(ngModel)]="userToUpdate.username">
+                </mat-form-field>
+                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                    <mat-label>Sede</mat-label>
+                    <mat-select [disabled]="savingUser" [(ngModel)]="userToUpdate.branch.id">
+                        @for (branch of branches; track branch.id) {
+                            <mat-option [value]="branch.id">{{ branch.name }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div style="text-align: center;">
+                <button mat-flat-button [disabled]="savingUser" (click)="updateUser()" style="background-color: #eae3db; color: #d1ae6f">Guardar</button>
+            </div>
+        </div>
+        <div style="background-color: lightgray; border-radius: 15px; width: 100%; display: flex; flex-direction: column; gap: 16px">
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px; margin-left: 8px;">
+                <div style="display: flex; flex-direction: column; gap: 8px">
+                    <div style="display: flex; align-items: center; gap: 8px">
+                        <h2 style="margin: 0">Usuarios</h2>
+                        <button mat-flat-button style="background-color: green" (click)="addUser()">
+                            <mat-icon>add</mat-icon>
+                            <span>Nuevo</span>
+                        </button>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <mat-form-field appearance="outline" subscriptSizing="dynamic" style="width: auto">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput [(ngModel)]="username">
+                            <button mat-icon-button matSuffix (click)="reloadSearch()">
+                                <mat-icon>clear</mat-icon>
+                            </button>
+                        </mat-form-field>
+                        <button mat-flat-button style="background-color: #eae3db; color: #d1ae6f" (click)="searchSale()">Buscar</button>
+                    </div>
+                </div>
+            </div>
+            <h4 style="margin: 0 0 0 8px;">Usuarios activos</h4>
+            @if (users.length == 0) {
+                <p style="margin: 0 0 0 8px;">No existen usuarios activos</p>
+            } @else {
+                <div style="max-height: 150px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; margin-left: 8px">
+                    @for (user of users; track user.id) {
+                        <p style="cursor: pointer; margin: 0" (click)="selectUser(user)">{{ user.name + " " + user.lastName }}</p>
+                    }
+                </div>
+            }
+            <h4 style="margin: 0 0 0 8px;">Usuarios inactivos</h4>
+            @if (usersNotActive.length == 0) {
+                <p style="margin: 0 0 8px 8px;">No existen usuarios inactivos</p>
+            } @else {
+                <div style="max-height: 150px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; margin-bottom: 8px; margin-left: 8px">
+                    @for (user of usersNotActive; track user.id) {
+                        <p style="cursor: pointer; margin: 0" (click)="selectUser(user)">{{ user.name + " " + user.lastName }}</p>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

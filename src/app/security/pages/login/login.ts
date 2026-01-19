@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoginDto} from '../../models/login.dto';
 import {LoginService} from '../../services/login/login.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {ErrorSnackBar} from '../../../shared/pages/error-snack-bar/error-snack-bar';
 import {ErrorMessage} from '../../../shared/models/error-message';
+import {CommunicationService} from "../../../shared/services/communication/communication.service";
 
 @Component({
   selector: 'app-login',
@@ -12,13 +13,17 @@ import {ErrorMessage} from '../../../shared/models/error-message';
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
-export class Login {
+export class Login implements OnInit {
   loading: boolean = false;
 
   loginDto: LoginDto = {} as LoginDto;
 
   constructor(private loginService: LoginService, private snackBar: MatSnackBar,
-              private router: Router) { }
+              private router: Router, private communicationService: CommunicationService) { }
+
+  ngOnInit(): void {
+    this.communicationService.emitTitleChange({ name: '', branch: '' });
+  }
 
   onSubmit() {
     this.loading = true;

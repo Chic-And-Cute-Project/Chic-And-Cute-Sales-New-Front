@@ -24,6 +24,7 @@ export class PageNotFound {
           this.router.navigate(['/home', response.user.role]).then();
         },
         error: () => {
+          this.snackBar.dismiss();
           localStorage.removeItem('token');
           this.router.navigate(['/login']).then();
         }

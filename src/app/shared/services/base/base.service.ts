@@ -23,4 +23,12 @@ export class BaseService<T> {
       }
     }).pipe(catchError(this.handleError));
   }
+
+  getAll(): Observable<T> {
+    return this.http.get<T>(`${this.basePath}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).pipe(catchError(this.handleError));
+  }
 }
