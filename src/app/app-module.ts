@@ -26,6 +26,9 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import { StockPrincipal } from './core/pages/stock-principal/stock-principal';
 import { StockAdmin } from './core/pages/stock-admin/stock-admin';
 import { StockBranch } from './core/pages/stock-branch/stock-branch';
+import { ProductsDiscounts } from './admin/pages/products-discounts/products-discounts';
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -41,7 +44,8 @@ import { StockBranch } from './core/pages/stock-branch/stock-branch';
     AddUserDialog,
     StockPrincipal,
     StockAdmin,
-    StockBranch
+    StockBranch,
+    ProductsDiscounts
   ],
   imports: [
     BrowserModule,
@@ -55,7 +59,9 @@ import { StockBranch } from './core/pages/stock-branch/stock-branch';
     MatSelectModule,
     MatIconModule,
     MatDialogModule,
-    MatProgressSpinner
+    MatProgressSpinner,
+    MatTableModule,
+    MatPaginator
   ],
   providers: [
     provideHttpClient(),

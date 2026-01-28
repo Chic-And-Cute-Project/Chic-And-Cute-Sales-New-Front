@@ -1,10 +1,10 @@
 <div style="height: 100%;">
     @switch (role) {
         @case ('ADMIN') {
-            <app-stock-admin [role]="role"></app-stock-admin>
+            <app-stock-admin></app-stock-admin>
         }
         @case ('BRANCH') {
-            <app-stock-branch [role]="role"></app-stock-branch>
+            <app-stock-branch></app-stock-branch>
         }
         @default {
             <app-page-not-found [injected]="true"></app-page-not-found>

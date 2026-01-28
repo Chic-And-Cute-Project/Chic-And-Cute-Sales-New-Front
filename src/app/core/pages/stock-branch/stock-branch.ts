@@ -1,4 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
+import {InventoryDto} from "../../models/inventory.dto";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-stock-branch',
@@ -7,5 +9,26 @@ import {Component, Input} from '@angular/core';
   styleUrl: './stock-branch.css'
 })
 export class StockBranch {
-  @Input() role: string = '';
+  productsSize: number = 0;
+  pageIndex: number = 0;
+
+  productName: string = '';
+
+  inventories: InventoryDto[];
+
+  constructor() {
+    this.inventories = [];
+  }
+
+  searchProduct() {
+
+  }
+
+  reloadSearch(changeSede: boolean) {
+
+  }
+
+  handlePageEvent(e: PageEvent) {
+
+  }
 }
