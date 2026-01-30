@@ -37,6 +37,7 @@ import { UpdateDiscountDialog } from './admin/dialogs/update-discount-dialog/upd
 import { ManageProductDialog } from './admin/dialogs/manage-product-dialog/manage-product-dialog';
 import {MatCheckbox} from "@angular/material/checkbox";
 import { UpdateInventoryDialog } from './core/dialogs/update-inventory-dialog/update-inventory-dialog';
+import {MAT_DATE_LOCALE, provideNativeDateAdapter} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -81,7 +82,9 @@ import { UpdateInventoryDialog } from './core/dialogs/update-inventory-dialog/up
   ],
   providers: [
     provideHttpClient(),
-    provideBrowserGlobalErrorListeners()
+    provideBrowserGlobalErrorListeners(),
+    provideNativeDateAdapter(),
+    { provide: MAT_DATE_LOCALE, useValue: 'es-PE'}
   ],
   bootstrap: [App]
 })

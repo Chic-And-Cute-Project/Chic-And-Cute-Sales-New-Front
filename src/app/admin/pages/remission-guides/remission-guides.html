@@ -1,7 +1,7 @@
 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; gap: 16px">
     <h1 style="margin: 0">Guías de Remisión</h1>
     <div class="content">
-        <div style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div style="display: flex; flex-direction: column; gap: 16px">
             <div>
                 <mat-form-field appearance="outline" subscriptSizing="dynamic">
                     <mat-label>Sede</mat-label>
@@ -12,11 +12,11 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <form #f="ngForm">
+            <form #f="ngForm" style="display: flex; flex-direction: column; gap: 16px">
                 @for (remissionGuideProduct of remissionGuide.products; track remissionGuideProduct.product.id) {
-                    <div class="remission-guide-item">
-                        <div style="display: flex; align-items: center">
-                            <mat-form-field subscriptSizing="dynamic" style="margin: 20px; width: 100px">
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <div style="display: flex; align-items: center; gap: 16px">
+                            <mat-form-field appearance="outline" subscriptSizing="dynamic" style="width: 150px">
                                 <mat-label>Cantidad</mat-label>
                                 <input type="number" min="1" [max]="remissionGuideProduct.limit" [disabled]="disableInventoryInput" matInput required [(ngModel)]="remissionGuideProduct.quantity" [name]="remissionGuideProduct.product.code">
                             </mat-form-field>
@@ -27,72 +27,73 @@
                 }
             </form>
             <div style="text-align: center">
-                <button mat-flat-button [disabled]="!f.form.valid" (click)="nextStep()" style="background-color: #eae3db; color: #d1ae6f">Confirmar guía</button>
+                <button mat-flat-button [disabled]="!f.form.valid || remissionGuide.products.length === 0" (click)="nextStep()" style="background-color: #eae3db; color: #d1ae6f">Confirmar guía</button>
             </div>
         </div>
         <div style="background-color: lightgray; border-radius: 15px; display: flex; flex-direction: column; gap: 16px">
-            <ng-container *ngIf="step === 1; else elseTemplate">
-                <div style="display: flex; align-items: center;">
-                    <h2 style="margin: 20px 10px">Productos</h2>
-                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
-                        <mat-label>Nombre</mat-label>
-                        <input matInput [(ngModel)]="productName">
-                        <button mat-icon-button matSuffix (click)="reloadSearch(false)">
-                            <mat-icon>clear</mat-icon>
-                        </button>
-                    </mat-form-field>
-                    <button mat-flat-button (click)="searchProduct()" style="background-color: #eae3db; color: #d1ae6f">Buscar</button>
+            @if (step === 1) {
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px; margin-left: 8px;">
+                    <h2 style="margin: 0">Productos</h2>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                            <mat-label>Código</mat-label>
+                            <input matInput [(ngModel)]="productCode">
+                            <button mat-icon-button matSuffix (click)="reloadSearch(false)">
+                                <mat-icon>clear</mat-icon>
+                            </button>
+                        </mat-form-field>
+                        <button mat-flat-button (click)="searchInventory()" style="background-color: #eae3db; color: #d1ae6f">Buscar</button>
+                    </div>
                 </div>
-                <div class="products-list">
-                    <table mat-table [dataSource]="inventories" style="background-color: lightgray">
-                        <ng-container matColumnDef="fullName">
-                            <td mat-cell  *matCellDef="let inventory">{{inventory.product.fullName}}</td>
+                <div style="overflow-y: auto; height: 400px">
+                    <table mat-table [dataSource]="inventories">
+                        <ng-container matColumnDef="code">
+                            <td mat-cell  *matCellDef="let inventory">{{inventory.product.code}}</td>
                         </ng-container>
 
                         <ng-container matColumnDef="quantity">
                             <td mat-cell *matCellDef="let inventory">{{inventory.quantity}}</td>
                         </ng-container>
 
-                        <tr mat-row *matRowDef="let inventory; columns: ['fullName', 'quantity'];" style="cursor: pointer; height: 30px" (click)="selectProduct(inventory)"></tr>
+                        <tr mat-row *matRowDef="let inventory; columns: displayedColumns;" style="cursor: pointer; height: 30px" (click)="selectProduct(inventory)"></tr>
                     </table>
                     <mat-paginator
                             (page)="handlePageEvent($event)"
-                            [length]="productsSize"
+                            [length]="inventoriesSize"
                             [pageSize]="10"
                             [pageIndex]="pageIndex"
                             hidePageSize
-                            showFirstLastButtons
-                            style="background-color: lightgray">
+                            showFirstLastButtons>
                     </mat-paginator>
                 </div>
-            </ng-container>
-            <ng-template #elseTemplate>
-                <div style="margin: 20px">
-                    <div style="margin-bottom: 15px">
-                        <mat-form-field appearance="outline" subscriptSizing="dynamic" style="margin-right: 15px;">
-                            <mat-label>Fecha de Emisión</mat-label>
-                            <input matInput [matDatepicker]="picker" [(ngModel)]="remissionGuide.date">
-                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" subscriptSizing="dynamic">
-                            <mat-label>Sede Destino</mat-label>
-                            <mat-select [(value)]="remissionGuide.branchToId">
-                                @for (branch of destinyBranches; track branch.id) {
-                                    <mat-option [value]="branch.id">{{ branch.name }}</mat-option>
-                                }
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                    <div style="margin-bottom: 15px">
-                        <mat-form-field appearance="outline" subscriptSizing="dynamic">
-                            <mat-label>Identificador</mat-label>
-                            <input matInput required [(ngModel)]="remissionGuide.identifier">
-                        </mat-form-field>
-                    </div>
+            } @else {
+                <div style="margin-top: 8px; margin-left: 8px;">
+                    <h2 style="margin: 0">Información de guía</h2>
+                </div>
+                <div class="guide-information">
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Fecha de Emisión</mat-label>
+                        <input matInput [matDatepicker]="picker" [(ngModel)]="remissionGuide.date">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Sede Destino</mat-label>
+                        <mat-select [(value)]="remissionGuide.branchToId">
+                            @for (branch of destinyBranches; track branch.id) {
+                                <mat-option [value]="branch.id">{{ branch.name }}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Identificador</mat-label>
+                        <input matInput [(ngModel)]="remissionGuide.identifier">
+                    </mat-form-field>
+                </div>
+                <div style="text-align: center; margin-bottom: 8px">
                     <button mat-flat-button (click)="createRemissionGuide()" style="background-color: #eae3db; color: #d1ae6f">Generar Guía</button>
                 </div>
-            </ng-template>
+            }
         </div>
     </div>
 </div>

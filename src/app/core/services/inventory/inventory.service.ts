@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BaseService} from "../../../shared/services/base/base.service";
 import {InventoryApiResponse} from "../../models/api-responses/inventory-api-response";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {catchError, Observable} from "rxjs";
 import {InventoryDto} from "../../models/inventory.dto";
 
@@ -15,40 +15,55 @@ export class InventoryService extends BaseService<InventoryApiResponse> {
     this.basePath = this.basePath + 'inventories';
   }
 
-  getAllByBranchAndPage(branchId: number, page: number): Observable<InventoryApiResponse> {
+  getAllByBranchAndPage(branchId: number, page: number, available: boolean = false): Observable<InventoryApiResponse> {
+    let params = new HttpParams();
+    if (available) params = params.set('available', available.toString());
     return this.http.get<InventoryApiResponse>(`${this.basePath}/branch/${branchId}/${page}`, {
+      params: params,
       headers: {
         'Content-Type': 'application/json'
       }
     }).pipe(catchError(this.handleError));
   }
 
-  countByBranch(branchId: number): Observable<InventoryApiResponse> {
+  countByBranch(branchId: number, available: boolean = false): Observable<InventoryApiResponse> {
+    let params = new HttpParams();
+    if (available) params = params.set('available', available.toString());
     return this.http.get<InventoryApiResponse>(`${this.basePath}/count/branch/${branchId}`, {
+      params: params,
       headers: {
         'Content-Type': 'application/json'
       }
     }).pipe(catchError(this.handleError));
   }
 
-  searchInventoriesByBranchAndPage(productCode: string, branchId: number, page: number): Observable<InventoryApiResponse> {
+  searchInventoriesByBranchAndPage(productCode: string, branchId: number, page: number, available: boolean = false): Observable<InventoryApiResponse> {
+    let params = new HttpParams();
+    if (available) params = params.set('available', available.toString());
     return this.http.get<InventoryApiResponse>(`${this.basePath}/search/${productCode}/${branchId}/${page}`, {
+      params: params,
       headers: {
         'Content-Type': 'application/json'
       }
     }).pipe(catchError(this.handleError));
   }
 
-  countByBranchAndProductCode(branchId: number, productCode: string): Observable<InventoryApiResponse> {
+  countByBranchAndProductCode(branchId: number, productCode: string, available: boolean = false): Observable<InventoryApiResponse> {
+    let params = new HttpParams();
+    if (available) params = params.set('available', available.toString());
     return this.http.get<InventoryApiResponse>(`${this.basePath}/count/code/${productCode}/${branchId}`, {
+      params: params,
       headers: {
         'Content-Type': 'application/json'
       }
     }).pipe(catchError(this.handleError));
   }
 
-  getAllByMyBranchAndPage(page: number): Observable<InventoryApiResponse> {
+  getAllByMyBranchAndPage(page: number, available: boolean = false): Observable<InventoryApiResponse> {
+    let params = new HttpParams();
+    if (available) params = params.set('available', available.toString());
     return this.http.get<InventoryApiResponse>(`${this.basePath}/my-branch/${page}`, {
+      params: params,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -56,8 +71,11 @@ export class InventoryService extends BaseService<InventoryApiResponse> {
     }).pipe(catchError(this.handleError));
   }
 
-  countByMyBranch(): Observable<InventoryApiResponse> {
+  countByMyBranch(available: boolean = false): Observable<InventoryApiResponse> {
+    let params = new HttpParams();
+    if (available) params = params.set('available', available.toString());
     return this.http.get<InventoryApiResponse>(`${this.basePath}/count/my-branch`, {
+      params: params,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -65,8 +83,11 @@ export class InventoryService extends BaseService<InventoryApiResponse> {
     }).pipe(catchError(this.handleError));
   }
 
-  searchInventoriesByMyBranchAndPage(productCode: string, page: number): Observable<InventoryApiResponse> {
+  searchInventoriesByMyBranchAndPage(productCode: string, page: number, available: boolean = false): Observable<InventoryApiResponse> {
+    let params = new HttpParams();
+    if (available) params = params.set('available', available.toString());
     return this.http.get<InventoryApiResponse>(`${this.basePath}/my-search/${productCode}/${page}`, {
+      params: params,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -74,8 +95,11 @@ export class InventoryService extends BaseService<InventoryApiResponse> {
     }).pipe(catchError(this.handleError));
   }
 
-  countByMyBranchAndProductCode(productCode: string): Observable<InventoryApiResponse> {
+  countByMyBranchAndProductCode(productCode: string, available: boolean = false): Observable<InventoryApiResponse> {
+    let params = new HttpParams();
+    if (available) params = params.set('available', available.toString());
     return this.http.get<InventoryApiResponse>(`${this.basePath}/my-count/code/${productCode}`, {
+      params: params,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`

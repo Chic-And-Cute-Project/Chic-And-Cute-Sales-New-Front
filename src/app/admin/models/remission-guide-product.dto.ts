@@ -6,4 +6,5 @@ export interface RemissionGuideProductDto {
   product: ProductDto;
 
   limit: number;
+  productId: number;
 }

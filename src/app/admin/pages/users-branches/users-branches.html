@@ -30,24 +30,22 @@
         </div>
         <div style="background-color: lightgray; border-radius: 15px; display: flex; flex-direction: column; gap: 16px">
             <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px; margin-left: 8px;">
-                <div style="display: flex; flex-direction: column; gap: 8px">
-                    <div style="display: flex; align-items: center; gap: 8px">
-                        <h2 style="margin: 0">Usuarios</h2>
-                        <button mat-flat-button style="background-color: green" (click)="addUser()">
-                            <mat-icon>add</mat-icon>
-                            <span>Nuevo</span>
+                <div style="display: flex; align-items: center; gap: 8px">
+                    <h2 style="margin: 0">Usuarios</h2>
+                    <button mat-flat-button style="background-color: green" (click)="addUser()">
+                        <mat-icon>add</mat-icon>
+                        <span>Nuevo</span>
+                    </button>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput [(ngModel)]="username">
+                        <button mat-icon-button matSuffix (click)="reloadSearch()">
+                            <mat-icon>clear</mat-icon>
                         </button>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <mat-form-field appearance="outline" subscriptSizing="dynamic">
-                            <mat-label>Nombre</mat-label>
-                            <input matInput [(ngModel)]="username">
-                            <button mat-icon-button matSuffix (click)="reloadSearch()">
-                                <mat-icon>clear</mat-icon>
-                            </button>
-                        </mat-form-field>
-                        <button mat-flat-button style="background-color: #eae3db; color: #d1ae6f" (click)="searchSale()">Buscar</button>
-                    </div>
+                    </mat-form-field>
+                    <button mat-flat-button style="background-color: #eae3db; color: #d1ae6f" (click)="searchSale()">Buscar</button>
                 </div>
             </div>
             <h4 style="margin: 0 0 0 8px;">Usuarios activos</h4>
