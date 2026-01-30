@@ -22,4 +22,12 @@ export class RemissionGuideService extends BaseService<RemissionGuideApiResponse
       }
     }).pipe(catchError(this.handleError));
   }
+
+  confirm(remissionGuideId: number) {
+    return this.http.get<RemissionGuideApiResponse>(`${this.basePath}/confirm/${remissionGuideId}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).pipe(catchError(this.handleError));
+  }
 }

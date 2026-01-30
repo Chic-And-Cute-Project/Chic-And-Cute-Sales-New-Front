@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {BranchDto} from "../../models/branch.dto";
-import {InventoryDto} from "../../models/inventory.dto";
+import {BranchDto} from "../../../models/branch.dto";
+import {InventoryDto} from "../../../models/inventory.dto";
 import {PageEvent} from "@angular/material/paginator";
-import {BranchService} from "../../../admin/services/branch/branch.service";
-import {InventoryService} from "../../services/inventory/inventory.service";
+import {BranchService} from "../../../../admin/services/branch/branch.service";
+import {InventoryService} from "../../../services/inventory/inventory.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {firstValueFrom} from "rxjs";
-import {ErrorSnackBar} from "../../../shared/pages/error-snack-bar/error-snack-bar";
-import {ErrorMessage} from "../../../shared/models/error-message";
+import {ErrorSnackBar} from "../../../../shared/pages/error-snack-bar/error-snack-bar";
+import {ErrorMessage} from "../../../../shared/models/error-message";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {UserDto} from "../../models/user.dto";
-import {UpdateInventoryDialog} from "../../dialogs/update-inventory-dialog/update-inventory-dialog";
+import {UserDto} from "../../../models/user.dto";
+import {UpdateInventoryDialog} from "../../../dialogs/update-inventory-dialog/update-inventory-dialog";
 
 @Component({
   selector: 'app-stock-admin',

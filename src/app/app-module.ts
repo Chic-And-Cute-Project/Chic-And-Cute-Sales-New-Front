@@ -23,9 +23,9 @@ import {MatIconModule} from "@angular/material/icon";
 import { AddUserDialog } from './admin/dialogs/add-user-dialog/add-user-dialog';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
-import { StockPrincipal } from './core/pages/stock-principal/stock-principal';
-import { StockAdmin } from './core/pages/stock-admin/stock-admin';
-import { StockBranch } from './core/pages/stock-branch/stock-branch';
+import { StockPrincipal } from './core/pages/stock/stock-principal/stock-principal';
+import { StockAdmin } from './core/pages/stock/stock-admin/stock-admin';
+import { StockBranch } from './core/pages/stock/stock-branch/stock-branch';
 import { ProductsDiscounts } from './admin/pages/products-discounts/products-discounts';
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
@@ -38,6 +38,9 @@ import { ManageProductDialog } from './admin/dialogs/manage-product-dialog/manag
 import {MatCheckbox} from "@angular/material/checkbox";
 import { UpdateInventoryDialog } from './core/dialogs/update-inventory-dialog/update-inventory-dialog';
 import {MAT_DATE_LOCALE, provideNativeDateAdapter} from "@angular/material/core";
+import { StockReceptionPrincipal } from './core/pages/stock-reception/stock-reception-principal/stock-reception-principal';
+import { StockReceptionAdmin } from './core/pages/stock-reception/stock-reception-admin/stock-reception-admin';
+import { StockReceptionBranch } from './core/pages/stock-reception/stock-reception-branch/stock-reception-branch';
 
 @NgModule({
   declarations: [
@@ -60,7 +63,10 @@ import {MAT_DATE_LOCALE, provideNativeDateAdapter} from "@angular/material/core"
     AddDiscountDialog,
     UpdateDiscountDialog,
     ManageProductDialog,
-    UpdateInventoryDialog
+    UpdateInventoryDialog,
+    StockReceptionPrincipal,
+    StockReceptionAdmin,
+    StockReceptionBranch
   ],
   imports: [
     BrowserModule,

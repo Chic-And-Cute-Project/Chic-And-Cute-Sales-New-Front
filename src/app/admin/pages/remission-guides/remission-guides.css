@@ -17,7 +17,7 @@ mat-paginator {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 8px;
-    margin: 0 8px
+    margin: 0 8px;
 }
 
 @media (max-width: 767px) {

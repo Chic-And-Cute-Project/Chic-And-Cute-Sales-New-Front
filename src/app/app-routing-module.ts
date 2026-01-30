@@ -7,10 +7,13 @@ import {noTokenGuard} from "./security/guards/no-token-guard";
 import {tokenAndCorrectRoleGuard} from "./core/guards/token-and-correct-role-guard";
 import {UsersBranches} from "./admin/pages/users-branches/users-branches";
 import {tokenAndAdminRoleGuard} from "./admin/guards/token-and-admin-role-guard";
-import {StockPrincipal} from "./core/pages/stock-principal/stock-principal";
+import {StockPrincipal} from "./core/pages/stock/stock-principal/stock-principal";
 import {tokenCorrectRoleAndBranchValidatorGuard} from "./core/guards/token-correct-role-and-branch-validator-guard";
 import {ProductsDiscounts} from "./admin/pages/products-discounts/products-discounts";
 import {RemissionGuides} from "./admin/pages/remission-guides/remission-guides";
+import {
+  StockReceptionPrincipal
+} from "./core/pages/stock-reception/stock-reception-principal/stock-reception-principal";
 
 const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noTokenGuard] },
@@ -18,6 +21,7 @@ const routes: Routes = [
   { path: 'home/:role', component: HomePrincipal, canActivate: [tokenAndCorrectRoleGuard]},
 
   { path: 'stock/:role', component: StockPrincipal, canActivate: [tokenCorrectRoleAndBranchValidatorGuard] },
+  { path: 'stock-reception/:role', component: StockReceptionPrincipal, canActivate: [tokenCorrectRoleAndBranchValidatorGuard] },
 
   { path: 'users-branches', component: UsersBranches, canActivate: [tokenAndAdminRoleGuard]},
   { path: 'products-discounts', component: ProductsDiscounts, canActivate: [tokenAndAdminRoleGuard]},

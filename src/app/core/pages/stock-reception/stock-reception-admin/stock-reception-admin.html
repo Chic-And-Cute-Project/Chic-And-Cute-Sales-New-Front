@@ -1,0 +1,36 @@
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; gap: 16px">
+    <h1 style="margin: 0">Recepción de Stock</h1>
+    <div style="width: 90%; display: flex; flex-direction: column; gap: 16px;">
+        <div>
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Guía de Remisión</mat-label>
+                <mat-select [disabled]="updatingRemissionGuide" [(value)]="remissionGuide">
+                    @for (remissionGuide of remissionGuides; track remissionGuide.id) {
+                        <mat-option [value]="remissionGuide">Identificador: {{remissionGuide.identifier}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 16px">
+            @if (remissionGuide.id !== undefined) {
+                <div class="guide-info">
+                    <p style="margin: 0"><span style="font-weight: bold">Sede Origen: </span>{{remissionGuide.branchFrom.name}}</p>
+                    <p style="margin: 0"><span style="font-weight: bold">Sede Destino: </span>{{remissionGuide.branchTo.name}}</p>
+                    <p style="margin: 0"><span style="font-weight: bold">Fecha de Creación: </span>{{ remissionGuide.date | date: 'dd/MM/yyyy'}}</p>
+                    <p style="margin: 0"><span style="font-weight: bold">Estado: </span>{{remissionGuide.status}}</p>
+                </div>
+                @for (remissionGuideItem of remissionGuide.products; track remissionGuideItem.id) {
+                    <div class="product-info">
+                        <p style="margin: 0">{{remissionGuideItem.product.code}}</p>
+                        <p style="margin: 0">{{remissionGuideItem.quantity}}</p>
+                    </div>
+                }
+                <div>
+                    <button mat-flat-button (click)="confirmRemissionGuide()" style="background-color: #eae3db; color: #d1ae6f" [disabled]="remissionGuide.status === 'Aceptada' || updatingRemissionGuide">Confirmar Guía</button>
+                </div>
+            } @else {
+                <h2 style="text-align: center; margin: 0">Guía de remisión no seleccionada</h2>
+            }
+        </div>
+    </div>
+</div>

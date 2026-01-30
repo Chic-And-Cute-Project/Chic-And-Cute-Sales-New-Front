@@ -1,0 +1,23 @@
+.product-info {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    background-color: lightgray;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.guide-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 16px;
+}
+
+@media (max-width: 767px) {
+    .product-info {
+        width: 90%;
+    }
+    .guide-info {
+        grid-template-columns: 1fr 1fr;
+    }
+}

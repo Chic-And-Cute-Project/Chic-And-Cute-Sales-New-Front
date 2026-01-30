@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {InventoryDto} from "../../models/inventory.dto";
+import {InventoryDto} from "../../../models/inventory.dto";
 import {PageEvent} from "@angular/material/paginator";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {InventoryService} from "../../services/inventory/inventory.service";
-import {ErrorMessage} from "../../../shared/models/error-message";
-import {ErrorSnackBar} from "../../../shared/pages/error-snack-bar/error-snack-bar";
+import {InventoryService} from "../../../services/inventory/inventory.service";
+import {ErrorMessage} from "../../../../shared/models/error-message";
+import {ErrorSnackBar} from "../../../../shared/pages/error-snack-bar/error-snack-bar";
 
 @Component({
   selector: 'app-stock-branch',
