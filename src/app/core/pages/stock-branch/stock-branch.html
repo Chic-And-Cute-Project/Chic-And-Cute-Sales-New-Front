@@ -2,24 +2,24 @@
     <h1 style="margin: 0">Stock</h1>
     <div style="width: 90%; display: flex; align-items: center; gap: 8px;">
         <mat-form-field appearance="outline" subscriptSizing="dynamic">
-            <mat-label>Nombre Producto</mat-label>
-            <input matInput [(ngModel)]="productName">
-            <button mat-icon-button matSuffix (click)="reloadSearch(false)">
+            <mat-label>Código Producto</mat-label>
+            <input matInput [(ngModel)]="productCode">
+            <button mat-icon-button matSuffix (click)="reloadSearch()">
                 <mat-icon>clear</mat-icon>
             </button>
         </mat-form-field>
-        <button mat-flat-button (click)="searchProduct()" style="background-color: #eae3db; color: #d1ae6f">Buscar</button>
+        <button mat-flat-button (click)="searchInventory()" style="background-color: #eae3db; color: #d1ae6f">Buscar</button>
     </div>
-    <div style="overflow: auto; width: 90%; border: solid 1px;">
+    <div style="overflow: auto; width: 90%; border: solid 1px; border-radius: 15px;">
         <table mat-table [dataSource]="inventories">
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Nombre de Producto </th>
-                <td mat-cell  *matCellDef="let inventory">{{inventory.product.fullName}}</td>
-            </ng-container>
-
             <ng-container matColumnDef="code">
                 <th mat-header-cell *matHeaderCellDef> Código de Producto </th>
                 <td mat-cell *matCellDef="let inventory">{{inventory.product.code}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef> Precio de Producto </th>
+                <td mat-cell  *matCellDef="let inventory">{{inventory.product.price}}</td>
             </ng-container>
 
             <ng-container matColumnDef="quantity">
@@ -27,12 +27,12 @@
                 <td mat-cell *matCellDef="let inventory">{{inventory.quantity}}</td>
             </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="['name', 'code', 'quantity']"></tr>
-            <tr style="height: 30px" mat-row *matRowDef="let inventory; columns: ['name', 'code', 'quantity'];"></tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr style="height: 30px" mat-row *matRowDef="let inventory; columns: displayedColumns;"></tr>
         </table>
         <mat-paginator
                 (page)="handlePageEvent($event)"
-                [length]="productsSize"
+                [length]="inventoriesSize"
                 [pageSize]="10"
                 [pageIndex]="pageIndex"
                 hidePageSize

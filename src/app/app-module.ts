@@ -36,6 +36,7 @@ import { AddDiscountDialog } from './admin/dialogs/add-discount-dialog/add-disco
 import { UpdateDiscountDialog } from './admin/dialogs/update-discount-dialog/update-discount-dialog';
 import { ManageProductDialog } from './admin/dialogs/manage-product-dialog/manage-product-dialog';
 import {MatCheckbox} from "@angular/material/checkbox";
+import { UpdateInventoryDialog } from './core/dialogs/update-inventory-dialog/update-inventory-dialog';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {MatCheckbox} from "@angular/material/checkbox";
     AddProductDialog,
     AddDiscountDialog,
     UpdateDiscountDialog,
-    ManageProductDialog
+    ManageProductDialog,
+    UpdateInventoryDialog
   ],
   imports: [
     BrowserModule,
