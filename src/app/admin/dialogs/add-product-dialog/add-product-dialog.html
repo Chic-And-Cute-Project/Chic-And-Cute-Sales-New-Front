@@ -1,0 +1,28 @@
+<div style="width: min(500px, 90vw);">
+    <h2 mat-dialog-title>Nuevo Producto</h2>
+    <mat-dialog-content>
+        <div class="tab-content">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Código</mat-label>
+                <input matInput [(ngModel)]="data.product.code">
+            </mat-form-field>
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Precio</mat-label>
+                <input matInput type="number" [(ngModel)]="data.product.price">
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close [disabled]="loading">Cancelar</button>
+        <button matButton="filled" [disabled]="loading" (click)="onCreateProduct()">
+            <mat-icon>save</mat-icon>
+            <span>Crear</span>
+        </button>
+        @if (loading) {
+            <div style="margin-left: 8px">
+                <mat-progress-spinner diameter="24" mode="indeterminate"></mat-progress-spinner>
+            </div>
+        }
+    </mat-dialog-actions>
+</div>
+

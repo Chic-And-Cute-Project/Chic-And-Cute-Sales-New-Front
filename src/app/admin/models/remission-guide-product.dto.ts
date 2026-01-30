@@ -1,10 +1,9 @@
 import {ProductDto} from "./product.dto";
 
-export interface DiscountDto {
+export interface RemissionGuideProductDto {
   id: number;
-  name: string;
   quantity: number;
   product: ProductDto;
 
-  productCode: string;
+  limit: number;
 }

@@ -1,0 +1,98 @@
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; gap: 16px">
+    <h1 style="margin: 0">Guías de Remisión</h1>
+    <div class="content">
+        <div style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                    <mat-label>Sede</mat-label>
+                    <mat-select [disabled]="disableInventoryInput" [(ngModel)]="remissionGuide.branchFromId">
+                        @for (branch of branches; track branch.id) {
+                            <mat-option [value]="branch.id" (click)="reloadSearch(true)">{{ branch.name }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <form #f="ngForm">
+                @for (remissionGuideProduct of remissionGuide.products; track remissionGuideProduct.product.id) {
+                    <div class="remission-guide-item">
+                        <div style="display: flex; align-items: center">
+                            <mat-form-field subscriptSizing="dynamic" style="margin: 20px; width: 100px">
+                                <mat-label>Cantidad</mat-label>
+                                <input type="number" min="1" [max]="remissionGuideProduct.limit" [disabled]="disableInventoryInput" matInput required [(ngModel)]="remissionGuideProduct.quantity" [name]="remissionGuideProduct.product.code">
+                            </mat-form-field>
+                            <p>{{ remissionGuideProduct.product.code }}</p>
+                        </div>
+                        <button [disabled]="disableInventoryInput" mat-flat-button style="background-color: #eae3db; color: #d1ae6f" (click)="deleteFromArray($index)">Quitar</button>
+                    </div>
+                }
+            </form>
+            <div style="text-align: center">
+                <button mat-flat-button [disabled]="!f.form.valid" (click)="nextStep()" style="background-color: #eae3db; color: #d1ae6f">Confirmar guía</button>
+            </div>
+        </div>
+        <div style="background-color: lightgray; border-radius: 15px; display: flex; flex-direction: column; gap: 16px">
+            <ng-container *ngIf="step === 1; else elseTemplate">
+                <div style="display: flex; align-items: center;">
+                    <h2 style="margin: 20px 10px">Productos</h2>
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput [(ngModel)]="productName">
+                        <button mat-icon-button matSuffix (click)="reloadSearch(false)">
+                            <mat-icon>clear</mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <button mat-flat-button (click)="searchProduct()" style="background-color: #eae3db; color: #d1ae6f">Buscar</button>
+                </div>
+                <div class="products-list">
+                    <table mat-table [dataSource]="inventories" style="background-color: lightgray">
+                        <ng-container matColumnDef="fullName">
+                            <td mat-cell  *matCellDef="let inventory">{{inventory.product.fullName}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="quantity">
+                            <td mat-cell *matCellDef="let inventory">{{inventory.quantity}}</td>
+                        </ng-container>
+
+                        <tr mat-row *matRowDef="let inventory; columns: ['fullName', 'quantity'];" style="cursor: pointer; height: 30px" (click)="selectProduct(inventory)"></tr>
+                    </table>
+                    <mat-paginator
+                            (page)="handlePageEvent($event)"
+                            [length]="productsSize"
+                            [pageSize]="10"
+                            [pageIndex]="pageIndex"
+                            hidePageSize
+                            showFirstLastButtons
+                            style="background-color: lightgray">
+                    </mat-paginator>
+                </div>
+            </ng-container>
+            <ng-template #elseTemplate>
+                <div style="margin: 20px">
+                    <div style="margin-bottom: 15px">
+                        <mat-form-field appearance="outline" subscriptSizing="dynamic" style="margin-right: 15px;">
+                            <mat-label>Fecha de Emisión</mat-label>
+                            <input matInput [matDatepicker]="picker" [(ngModel)]="remissionGuide.date">
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                            <mat-label>Sede Destino</mat-label>
+                            <mat-select [(value)]="remissionGuide.branchToId">
+                                @for (branch of destinyBranches; track branch.id) {
+                                    <mat-option [value]="branch.id">{{ branch.name }}</mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div style="margin-bottom: 15px">
+                        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                            <mat-label>Identificador</mat-label>
+                            <input matInput required [(ngModel)]="remissionGuide.identifier">
+                        </mat-form-field>
+                    </div>
+                    <button mat-flat-button (click)="createRemissionGuide()" style="background-color: #eae3db; color: #d1ae6f">Generar Guía</button>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

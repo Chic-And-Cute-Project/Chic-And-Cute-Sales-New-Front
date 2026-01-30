@@ -11,10 +11,10 @@ type AddUser = {
 };
 
 @Component({
-  selector: 'app-add-user.dialog',
+  selector: 'app-add-user-dialog',
   standalone: false,
-  templateUrl: './add-user.dialog.html',
-  styleUrl: './add-user.dialog.css'
+  templateUrl: './add-user-dialog.html',
+  styleUrl: './add-user-dialog.css'
 })
 export class AddUserDialog {
   loading: boolean = false;

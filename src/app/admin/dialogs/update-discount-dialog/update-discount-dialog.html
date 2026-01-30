@@ -1,0 +1,24 @@
+<div style="width: min(500px, 90vw);">
+    <h2 mat-dialog-title>Actualizar Descuento</h2>
+    <mat-dialog-content>
+        <div class="tab-content">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic" style="height: fit-content">
+                <mat-label>Nombre</mat-label>
+                <input matInput [(ngModel)]="data.discount.name">
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close [disabled]="loading">Cancelar</button>
+        <button matButton="filled" [disabled]="loading" (click)="onUpdateDiscount()">
+            <mat-icon>save</mat-icon>
+            <span>Guardar</span>
+        </button>
+        @if (loading) {
+            <div style="margin-left: 8px">
+                <mat-progress-spinner diameter="24" mode="indeterminate"></mat-progress-spinner>
+            </div>
+        }
+    </mat-dialog-actions>
+</div>
+

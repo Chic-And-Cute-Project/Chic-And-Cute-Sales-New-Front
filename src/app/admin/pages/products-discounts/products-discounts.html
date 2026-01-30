@@ -12,7 +12,7 @@
             <div style="display: flex; align-items: center; gap: 8px;">
                 <mat-form-field appearance="outline" subscriptSizing="dynamic">
                     <mat-label>Nombre Producto</mat-label>
-                    <input matInput [(ngModel)]="productName">
+                    <input matInput [(ngModel)]="productCode">
                     <button mat-icon-button matSuffix (click)="reloadSearch()">
                         <mat-icon>clear</mat-icon>
                     </button>
@@ -36,8 +36,8 @@
                         <td mat-cell *matCellDef="let product">S/. {{product.price}}</td>
                     </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="['code', 'fullName', 'price']"></tr>
-                    <tr mat-row *matRowDef="let product; columns: ['code', 'fullName', 'price'];" style="cursor: pointer; height: 30px;" (click)="manageProduct(product)"></tr>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let product; columns: displayedColumns;" style="cursor: pointer; height: 30px;" (click)="manageProduct(product)"></tr>
                 </table>
                 <mat-paginator
                         (page)="handlePageEvent($event)"
@@ -60,18 +60,29 @@
             </div>
             <div style="overflow: auto;">
                 <table mat-table [dataSource]="discounts">
-                    <ng-container matColumnDef="code">
+                    <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef>Nombre</th>
                         <td mat-cell  *matCellDef="let discount">{{discount.name}}</td>
                     </ng-container>
 
-                    <ng-container matColumnDef="fullName">
+                    <ng-container matColumnDef="discount">
                         <th mat-header-cell *matHeaderCellDef>Descuento</th>
                         <td mat-cell *matCellDef="let discount">{{discount.quantity}}%</td>
                     </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="['code', 'fullName']"></tr>
-                    <tr mat-row *matRowDef="let discount; columns: ['code', 'fullName'];" style="cursor: pointer; height: 30px;" (click)="updateDiscount(discount)"></tr>
+                    <ng-container matColumnDef="productAssociated">
+                        <th mat-header-cell *matHeaderCellDef>Producto Asociado</th>
+                        <td mat-cell *matCellDef="let discount">
+                            @if(discount.product) {
+                                {{discount.product.code}}
+                            } @else {
+                                No
+                            }
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsDiscount"></tr>
+                    <tr mat-row *matRowDef="let discount; columns: displayedColumnsDiscount;" style="cursor: pointer; height: 30px;" (click)="updateDiscount(discount)"></tr>
                 </table>
             </div>
         </div>

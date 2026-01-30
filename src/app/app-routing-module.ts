@@ -10,6 +10,7 @@ import {tokenAndAdminRoleGuard} from "./admin/guards/token-and-admin-role-guard"
 import {StockPrincipal} from "./core/pages/stock-principal/stock-principal";
 import {tokenCorrectRoleAndBranchValidatorGuard} from "./core/guards/token-correct-role-and-branch-validator-guard";
 import {ProductsDiscounts} from "./admin/pages/products-discounts/products-discounts";
+import {RemissionGuides} from "./admin/pages/remission-guides/remission-guides";
 
 const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noTokenGuard] },
@@ -20,6 +21,7 @@ const routes: Routes = [
 
   { path: 'users-branches', component: UsersBranches, canActivate: [tokenAndAdminRoleGuard]},
   { path: 'products-discounts', component: ProductsDiscounts, canActivate: [tokenAndAdminRoleGuard]},
+  { path: 'remission-guide', component: RemissionGuides, canActivate: [tokenAndAdminRoleGuard]},
 
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: PageNotFound }

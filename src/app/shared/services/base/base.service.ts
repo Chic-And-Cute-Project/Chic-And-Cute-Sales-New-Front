@@ -31,4 +31,12 @@ export class BaseService<T> {
       }
     }).pipe(catchError(this.handleError));
   }
+
+  count(): Observable<T> {
+    return this.http.get<T>(`${this.basePath}/count`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).pipe(catchError(this.handleError));
+  }
 }

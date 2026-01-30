@@ -20,7 +20,7 @@ import { HomeBranch } from './core/pages/home/home-branch/home-branch';
 import { UsersBranches } from './admin/pages/users-branches/users-branches';
 import {MatSelectModule} from "@angular/material/select";
 import {MatIconModule} from "@angular/material/icon";
-import { AddUserDialog } from './admin/dialogs/add-user.dialog/add-user.dialog';
+import { AddUserDialog } from './admin/dialogs/add-user-dialog/add-user-dialog';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import { StockPrincipal } from './core/pages/stock-principal/stock-principal';
@@ -29,6 +29,13 @@ import { StockBranch } from './core/pages/stock-branch/stock-branch';
 import { ProductsDiscounts } from './admin/pages/products-discounts/products-discounts';
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
+import { RemissionGuides } from './admin/pages/remission-guides/remission-guides';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import { AddProductDialog } from './admin/dialogs/add-product-dialog/add-product-dialog';
+import { AddDiscountDialog } from './admin/dialogs/add-discount-dialog/add-discount-dialog';
+import { UpdateDiscountDialog } from './admin/dialogs/update-discount-dialog/update-discount-dialog';
+import { ManageProductDialog } from './admin/dialogs/manage-product-dialog/manage-product-dialog';
+import {MatCheckbox} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -45,7 +52,12 @@ import {MatPaginator} from "@angular/material/paginator";
     StockPrincipal,
     StockAdmin,
     StockBranch,
-    ProductsDiscounts
+    ProductsDiscounts,
+    RemissionGuides,
+    AddProductDialog,
+    AddDiscountDialog,
+    UpdateDiscountDialog,
+    ManageProductDialog
   ],
   imports: [
     BrowserModule,
@@ -61,7 +73,9 @@ import {MatPaginator} from "@angular/material/paginator";
     MatDialogModule,
     MatProgressSpinner,
     MatTableModule,
-    MatPaginator
+    MatPaginator,
+    MatDatepickerModule,
+    MatCheckbox
   ],
   providers: [
     provideHttpClient(),

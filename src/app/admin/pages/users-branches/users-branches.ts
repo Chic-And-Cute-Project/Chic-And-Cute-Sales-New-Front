@@ -7,7 +7,7 @@ import {ErrorSnackBar} from "../../../shared/pages/error-snack-bar/error-snack-b
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {UserService} from "../../../core/services/user/user.service";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {AddUserDialog} from "../../dialogs/add-user.dialog/add-user.dialog";
+import {AddUserDialog} from "../../dialogs/add-user-dialog/add-user-dialog";
 
 @Component({
   selector: 'app-users-branches',
