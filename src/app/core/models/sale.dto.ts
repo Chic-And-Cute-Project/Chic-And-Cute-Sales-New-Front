@@ -9,7 +9,7 @@ export interface SaleDto {
   branch: BranchDto;
   user: UserDto;
   detail: SaleDetailDto[];
-  payments: SalePaymentDto[];
+  paymentMethod: SalePaymentDto[];
 
   branchId: number;
   userId: number;

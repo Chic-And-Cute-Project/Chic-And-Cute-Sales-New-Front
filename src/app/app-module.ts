@@ -44,6 +44,9 @@ import { StockReceptionBranch } from './core/pages/stock-reception/stock-recepti
 import { PointOfSalePrincipal } from './core/pages/point-of-sale/point-of-sale-principal/point-of-sale-principal';
 import { PointOfSaleAdmin } from './core/pages/point-of-sale/point-of-sale-admin/point-of-sale-admin';
 import { PointOfSaleBranch } from './core/pages/point-of-sale/point-of-sale-branch/point-of-sale-branch';
+import { CloseSalesDaysPrincipal } from './core/pages/close-sales-days/close-sales-days-principal/close-sales-days-principal';
+import { CloseSalesDaysAdmin } from './core/pages/close-sales-days/close-sales-days-admin/close-sales-days-admin';
+import { CloseSalesDaysBranch } from './core/pages/close-sales-days/close-sales-days-branch/close-sales-days-branch';
 
 @NgModule({
   declarations: [
@@ -72,7 +75,10 @@ import { PointOfSaleBranch } from './core/pages/point-of-sale/point-of-sale-bran
     StockReceptionBranch,
     PointOfSalePrincipal,
     PointOfSaleAdmin,
-    PointOfSaleBranch
+    PointOfSaleBranch,
+    CloseSalesDaysPrincipal,
+    CloseSalesDaysAdmin,
+    CloseSalesDaysBranch
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,60 @@
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; gap: 16px">
+    <h1 style="margin: 0">Cierre de Caja</h1>
+    <div class="content">
+        <div style="display: flex; flex-direction: column; gap: 8px">
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                    <mat-label>Sede</mat-label>
+                    <mat-select [disabled]="savingCloseSalesDay" [(value)]="closeSalesDay.branchId">
+                        @for (branch of branches; track branch.id) {
+                            <mat-option [value]="branch.id">{{ branch.name }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                    <mat-label>Fecha Cierre</mat-label>
+                    <input matInput [matDatepicker]="picker" [(ngModel)]="closeSalesDay.date" [disabled]="savingCloseSalesDay">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <button mat-flat-button [disabled]="savingCloseSalesDay" (click)="refreshSales()" style="background-color: #eae3db; color: #d1ae6f">Buscar</button>
+            </div>
+            <div style="height: 425px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px">
+                @for (sale of closeSalesDay.sales; track sale.id) {
+                    <div style="display: flex; justify-content: space-between; background-color: lightgray; padding: 15px; border-radius: 15px;">
+                        <div style="display: flex; flex-direction: column; gap: 8px">
+                            @for (saleDetail of sale.detail; track saleDetail.id) {
+                                <p style="margin: 0">
+                                    {{saleDetail.quantity}} {{saleDetail.product.code}} {{saleDetail.product.price}}
+                                    @if (saleDetail.discount) {
+                                        <span style="font-style: italic;"> Descuento: {{saleDetail.discount}}</span>
+                                    }
+                                </p>
+                            }
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 8px">
+                            @for (paymentMethod of sale.paymentMethod; track paymentMethod.id) {
+                                <p style="margin: 0">{{paymentMethod.type + " S/. " + paymentMethod.amount}}</p>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+            <div style="display: flex; justify-content: space-between; gap: 16px;">
+                <div style="display: flex; flex-direction: column; gap: 8px">
+                    <p style="margin: 0">Efectivo S/. {{closeSalesDay.cashAmount}}</p>
+                    <p style="margin: 0">Visa S/. {{closeSalesDay.cardAmount}}</p>
+                    <p style="margin: 0">Total S/. {{closeSalesDay.totalAmount}}</p>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px">
+                    <p style="margin: 0">Pagos con efectivo: {{cashCount}}</p>
+                    <p style="margin: 0">Pagos con tarjeta: {{cardCount}}</p>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 16px;">
+            <button mat-flat-button style="background-color: #eae3db; color: #d1ae6f" (click)="saveCloseSalesDay()">Guardar Cierre</button>
+            <button mat-flat-button style="background-color: #eae3db; color: #d1ae6f" (click)="printPdf()">Generar Pdf</button>
+        </div>
+    </div>
+</div>

@@ -56,7 +56,7 @@ export class PointOfSaleAdmin implements OnInit {
     this.sale = {
       date: date,
       detail: [] as SaleDetailDto[],
-      payments: [] as SalePaymentDto[],
+      paymentMethod: [] as SalePaymentDto[],
       finalPrice: 0
     } as SaleDto;
     this.paymentMethods = { cardAmount: 0, cashAmount: 0 } as { cashAmount: number, cardAmount: number };
@@ -236,7 +236,7 @@ export class PointOfSaleAdmin implements OnInit {
         } else {
           this.disablePaymentInput = true;
           const salePaymentDto: SalePaymentDto = { type: 'EFECTIVO', amount: this.paymentMethods.cashAmount } as SalePaymentDto;
-          this.sale.payments.push(salePaymentDto);
+          this.sale.paymentMethod.push(salePaymentDto);
           this.payedPrice = totalPrice;
           const price = this.payedPrice - this.sale.finalPrice;
           this.change = Number(price.toFixed(2));
@@ -246,11 +246,11 @@ export class PointOfSaleAdmin implements OnInit {
       this.disablePaymentInput = true;
       if (this.paymentMethods.cardAmount > 0) {
         const salePaymentDto: SalePaymentDto = { type: 'VISA', amount: this.paymentMethods.cardAmount } as SalePaymentDto;
-        this.sale.payments.push(salePaymentDto);
+        this.sale.paymentMethod.push(salePaymentDto);
       }
       if (this.paymentMethods.cashAmount > 0) {
         const salePaymentDto: SalePaymentDto = { type: 'EFECTIVO', amount: this.paymentMethods.cashAmount } as SalePaymentDto;
-        this.sale.payments.push(salePaymentDto);
+        this.sale.paymentMethod.push(salePaymentDto);
       }
       this.payedPrice = totalPrice;
       this.change = 0.00;

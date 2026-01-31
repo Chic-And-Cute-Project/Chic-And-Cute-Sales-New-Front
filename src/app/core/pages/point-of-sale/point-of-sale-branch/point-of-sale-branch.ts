@@ -55,7 +55,7 @@ export class PointOfSaleBranch implements OnInit {
       date: date,
       branchId: this.userAuxService.getUser().branch.id,
       detail: [] as SaleDetailDto[],
-      payments: [] as SalePaymentDto[],
+      paymentMethod: [] as SalePaymentDto[],
       finalPrice: 0
     } as SaleDto;
     this.paymentMethods = { cardAmount: 0, cashAmount: 0 } as { cashAmount: number, cardAmount: number };
@@ -223,7 +223,7 @@ export class PointOfSaleBranch implements OnInit {
         } else {
           this.disablePaymentInput = true;
           const salePaymentDto: SalePaymentDto = { type: 'EFECTIVO', amount: this.paymentMethods.cashAmount } as SalePaymentDto;
-          this.sale.payments.push(salePaymentDto);
+          this.sale.paymentMethod.push(salePaymentDto);
           this.payedPrice = totalPrice;
           const price = this.payedPrice - this.sale.finalPrice;
           this.change = Number(price.toFixed(2));
@@ -233,11 +233,11 @@ export class PointOfSaleBranch implements OnInit {
       this.disablePaymentInput = true;
       if (this.paymentMethods.cardAmount > 0) {
         const salePaymentDto: SalePaymentDto = { type: 'VISA', amount: this.paymentMethods.cardAmount } as SalePaymentDto;
-        this.sale.payments.push(salePaymentDto);
+        this.sale.paymentMethod.push(salePaymentDto);
       }
       if (this.paymentMethods.cashAmount > 0) {
         const salePaymentDto: SalePaymentDto = { type: 'EFECTIVO', amount: this.paymentMethods.cashAmount } as SalePaymentDto;
-        this.sale.payments.push(salePaymentDto);
+        this.sale.paymentMethod.push(salePaymentDto);
       }
       this.payedPrice = totalPrice;
       this.change = 0.00;
@@ -253,7 +253,7 @@ export class PointOfSaleBranch implements OnInit {
       next: () => {
         this.savingSale = false;
         this.snackBar.dismiss();
-        this.router.navigate(['/home/ADMIN']).then();
+        this.router.navigate(['/home/BRANCH']).then();
       },
       error: (error: ErrorMessage) => {
         this.savingSale = false;
