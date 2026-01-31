@@ -1,0 +1,38 @@
+table {
+    background-color: lightgray;
+}
+
+mat-paginator {
+    background-color: lightgray;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 90%;
+    gap: 8px;
+}
+
+.sale-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    border: solid 1px;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+@media (max-width: 767px) {
+    .content {
+        grid-template-columns: 1fr;
+    }
+    .sale-detail {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        gap: 8px;
+    }
+    .delete-button {
+        grid-column: span 2 / span 2;
+    }
+}

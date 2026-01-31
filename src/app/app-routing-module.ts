@@ -14,6 +14,7 @@ import {RemissionGuides} from "./admin/pages/remission-guides/remission-guides";
 import {
   StockReceptionPrincipal
 } from "./core/pages/stock-reception/stock-reception-principal/stock-reception-principal";
+import {PointOfSalePrincipal} from "./core/pages/point-of-sale/point-of-sale-principal/point-of-sale-principal";
 
 const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noTokenGuard] },
@@ -22,6 +23,7 @@ const routes: Routes = [
 
   { path: 'stock/:role', component: StockPrincipal, canActivate: [tokenCorrectRoleAndBranchValidatorGuard] },
   { path: 'stock-reception/:role', component: StockReceptionPrincipal, canActivate: [tokenCorrectRoleAndBranchValidatorGuard] },
+  { path: 'point-of-sale/:role', component: PointOfSalePrincipal, canActivate: [tokenCorrectRoleAndBranchValidatorGuard] },
 
   { path: 'users-branches', component: UsersBranches, canActivate: [tokenAndAdminRoleGuard]},
   { path: 'products-discounts', component: ProductsDiscounts, canActivate: [tokenAndAdminRoleGuard]},

@@ -4,7 +4,7 @@
         @if (this.user.branch.name !== 'Sin sede asignada') {
             <h1 style="margin: 0; text-align: center;">Bienvenida</h1>
             <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
-                <button mat-flat-button [routerLink]="['/sales-point', role]" style="margin-right: 10px; background-color: #eae3db; color: #d1ae6f">Punto de Venta</button>
+                <button mat-flat-button [routerLink]="['/point-of-sale', role]" style="margin-right: 10px; background-color: #eae3db; color: #d1ae6f">Punto de Venta</button>
                 <button mat-flat-button [routerLink]="['/stock', role]" style="margin-right: 10px; background-color: #eae3db; color: #d1ae6f">Stock</button>
                 <button mat-flat-button [routerLink]="['/reports', role]" style="margin-right: 10px; background-color: #eae3db; color: #d1ae6f">Reportes</button>
                 <button mat-flat-button [routerLink]="['/close-sales-day', role]" style="background-color: #eae3db; color: #d1ae6f">Cierre de Caja</button>

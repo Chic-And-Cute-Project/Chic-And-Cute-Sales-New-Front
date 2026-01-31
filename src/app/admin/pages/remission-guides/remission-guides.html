@@ -4,7 +4,7 @@
         <div style="display: flex; flex-direction: column; gap: 16px">
             <div>
                 <mat-form-field appearance="outline" subscriptSizing="dynamic">
-                    <mat-label>Sede</mat-label>
+                    <mat-label>Sede Origen</mat-label>
                     <mat-select [disabled]="disableInventoryInput" [(ngModel)]="remissionGuide.branchFromId">
                         @for (branch of branches; track branch.id) {
                             <mat-option [value]="branch.id" (click)="reloadSearch(true)">{{ branch.name }}</mat-option>

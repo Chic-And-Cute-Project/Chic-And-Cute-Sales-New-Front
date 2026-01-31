@@ -41,6 +41,9 @@ import {MAT_DATE_LOCALE, provideNativeDateAdapter} from "@angular/material/core"
 import { StockReceptionPrincipal } from './core/pages/stock-reception/stock-reception-principal/stock-reception-principal';
 import { StockReceptionAdmin } from './core/pages/stock-reception/stock-reception-admin/stock-reception-admin';
 import { StockReceptionBranch } from './core/pages/stock-reception/stock-reception-branch/stock-reception-branch';
+import { PointOfSalePrincipal } from './core/pages/point-of-sale/point-of-sale-principal/point-of-sale-principal';
+import { PointOfSaleAdmin } from './core/pages/point-of-sale/point-of-sale-admin/point-of-sale-admin';
+import { PointOfSaleBranch } from './core/pages/point-of-sale/point-of-sale-branch/point-of-sale-branch';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,10 @@ import { StockReceptionBranch } from './core/pages/stock-reception/stock-recepti
     UpdateInventoryDialog,
     StockReceptionPrincipal,
     StockReceptionAdmin,
-    StockReceptionBranch
+    StockReceptionBranch,
+    PointOfSalePrincipal,
+    PointOfSaleAdmin,
+    PointOfSaleBranch
   ],
   imports: [
     BrowserModule,

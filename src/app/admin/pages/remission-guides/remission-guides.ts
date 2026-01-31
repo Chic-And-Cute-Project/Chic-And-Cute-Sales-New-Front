@@ -139,7 +139,7 @@ export class RemissionGuides implements OnInit {
       this.snackBar.open("Actualizando");
       this.refreshInventories(0, true);
     } else {
-      if (this.remissionGuide.branchFromId) {
+      if (this.searchingMode) {
         this.pageIndex = 0;
         this.searchingMode = false;
         this.productCode = "";
@@ -203,7 +203,7 @@ export class RemissionGuides implements OnInit {
       next: () => {
         this.savingRemissionGuide = false;
         this.snackBar.dismiss();
-        this.router.navigate(['/stock-reception/Admin']).then();
+        this.router.navigate(['/stock-reception/ADMIN']).then();
       },
       error: (error: ErrorMessage) => {
         this.savingRemissionGuide = false;

@@ -1,0 +1,13 @@
+<div style="height: 100%;">
+    @switch (role) {
+        @case ('ADMIN') {
+            <app-point-of-sale-admin></app-point-of-sale-admin>
+        }
+        @case ('BRANCH') {
+            <app-point-of-sale-branch></app-point-of-sale-branch>
+        }
+        @default {
+            <app-page-not-found [injected]="true"></app-page-not-found>
+        }
+    }
+</div>
