@@ -40,4 +40,21 @@ export class SaleService extends BaseService<SaleApiResponse> {
       }
     }).pipe(catchError(this.handleError));
   }
+
+  getAdminReport(userId: number, branchId: number, minDate: Date, maxDate: Date): Observable<SaleApiResponse> {
+    return this.http.get<SaleApiResponse>(`${this.basePath}/admin-report/${userId}/${branchId}/${minDate.toISOString()}/${maxDate.toISOString()}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).pipe(catchError(this.handleError));
+  }
+
+  getMyReport(minDate: Date, maxDate: Date): Observable<SaleApiResponse> {
+    return this.http.get<SaleApiResponse>(`${this.basePath}/my-report/${minDate.toISOString()}/${maxDate.toISOString()}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    }).pipe(catchError(this.handleError));
+  }
 }

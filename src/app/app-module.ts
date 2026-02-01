@@ -47,6 +47,9 @@ import { PointOfSaleBranch } from './core/pages/point-of-sale/point-of-sale-bran
 import { CloseSalesDaysPrincipal } from './core/pages/close-sales-days/close-sales-days-principal/close-sales-days-principal';
 import { CloseSalesDaysAdmin } from './core/pages/close-sales-days/close-sales-days-admin/close-sales-days-admin';
 import { CloseSalesDaysBranch } from './core/pages/close-sales-days/close-sales-days-branch/close-sales-days-branch';
+import { ReportPrincipal } from './core/pages/report/report-principal/report-principal';
+import { ReportAdmin } from './core/pages/report/report-admin/report-admin';
+import { ReportBranch } from './core/pages/report/report-branch/report-branch';
 
 @NgModule({
   declarations: [
@@ -78,7 +81,10 @@ import { CloseSalesDaysBranch } from './core/pages/close-sales-days/close-sales-
     PointOfSaleBranch,
     CloseSalesDaysPrincipal,
     CloseSalesDaysAdmin,
-    CloseSalesDaysBranch
+    CloseSalesDaysBranch,
+    ReportPrincipal,
+    ReportAdmin,
+    ReportBranch
   ],
   imports: [
     BrowserModule,
