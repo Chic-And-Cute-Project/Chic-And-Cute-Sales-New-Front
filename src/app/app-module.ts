@@ -50,6 +50,9 @@ import { CloseSalesDaysBranch } from './core/pages/close-sales-days/close-sales-
 import { ReportPrincipal } from './core/pages/report/report-principal/report-principal';
 import { ReportAdmin } from './core/pages/report/report-admin/report-admin';
 import { ReportBranch } from './core/pages/report/report-branch/report-branch';
+import { DocumentsPrincipal } from './core/pages/documents/documents-principal/documents-principal';
+import { DocumentsAdmin } from './core/pages/documents/documents-admin/documents-admin';
+import { DocumentsBranch } from './core/pages/documents/documents-branch/documents-branch';
 
 @NgModule({
   declarations: [
@@ -84,7 +87,10 @@ import { ReportBranch } from './core/pages/report/report-branch/report-branch';
     CloseSalesDaysBranch,
     ReportPrincipal,
     ReportAdmin,
-    ReportBranch
+    ReportBranch,
+    DocumentsPrincipal,
+    DocumentsAdmin,
+    DocumentsBranch
   ],
   imports: [
     BrowserModule,

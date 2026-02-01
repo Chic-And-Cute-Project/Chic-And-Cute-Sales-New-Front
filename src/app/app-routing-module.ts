@@ -19,6 +19,7 @@ import {
   CloseSalesDaysPrincipal
 } from "./core/pages/close-sales-days/close-sales-days-principal/close-sales-days-principal";
 import {ReportPrincipal} from "./core/pages/report/report-principal/report-principal";
+import {DocumentsPrincipal} from "./core/pages/documents/documents-principal/documents-principal";
 
 const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noTokenGuard] },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'point-of-sale/:role', component: PointOfSalePrincipal, canActivate: [tokenCorrectRoleAndBranchValidatorGuard] },
   { path: 'close-sales-day/:role', component: CloseSalesDaysPrincipal, canActivate: [tokenCorrectRoleAndBranchValidatorGuard] },
   { path: 'reports/:role', component: ReportPrincipal, canActivate: [tokenCorrectRoleAndBranchValidatorGuard] },
+  { path: 'documents/:role', component: DocumentsPrincipal, canActivate: [tokenCorrectRoleAndBranchValidatorGuard] },
 
   { path: 'users-branches', component: UsersBranches, canActivate: [tokenAndAdminRoleGuard]},
   { path: 'products-discounts', component: ProductsDiscounts, canActivate: [tokenAndAdminRoleGuard]},

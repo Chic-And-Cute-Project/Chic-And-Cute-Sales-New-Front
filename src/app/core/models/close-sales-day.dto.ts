@@ -15,4 +15,5 @@ export interface CloseSalesDayDto {
   sales: SaleDto[];
   branchId: number;
   totalAmount: number;
+  show: boolean;
 }
