@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/Chic-And-Cute-Sales-New-Front/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
