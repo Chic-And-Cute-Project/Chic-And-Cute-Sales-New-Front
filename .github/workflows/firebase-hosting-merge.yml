@@ -17,3 +17,17 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CHICANDCUTESALES }}
           channelId: live
           projectId: chicandcutesales
+      - name: Notificación en Discord
+        if: success()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: "Despliegue exitoso en *chic-frontend*"
+      - name: Notificación en Discord (fallo)
+        if: failure()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: 'El despliegue en *chic-frontend* ha fallado'
