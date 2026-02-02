@@ -40,7 +40,7 @@ export class InventoryService extends BaseService<InventoryApiResponse> {
   searchInventoriesByBranchAndPage(productCode: string, branchId: number, page: number, available: boolean = false): Observable<InventoryApiResponse> {
     let params = new HttpParams();
     if (available) params = params.set('available', available.toString());
-    return this.http.get<InventoryApiResponse>(`${this.basePath}/search/${productCode}/${branchId}/${page}`, {
+    return this.http.get<InventoryApiResponse>(`${this.basePath}/search/${encodeURIComponent(productCode)}/${branchId}/${page}`, {
       params: params,
       headers: {
         'Content-Type': 'application/json'
@@ -51,7 +51,7 @@ export class InventoryService extends BaseService<InventoryApiResponse> {
   countByBranchAndProductCode(branchId: number, productCode: string, available: boolean = false): Observable<InventoryApiResponse> {
     let params = new HttpParams();
     if (available) params = params.set('available', available.toString());
-    return this.http.get<InventoryApiResponse>(`${this.basePath}/count/code/${productCode}/${branchId}`, {
+    return this.http.get<InventoryApiResponse>(`${this.basePath}/count/code/${encodeURIComponent(productCode)}/${branchId}`, {
       params: params,
       headers: {
         'Content-Type': 'application/json'
@@ -86,7 +86,7 @@ export class InventoryService extends BaseService<InventoryApiResponse> {
   searchInventoriesByMyBranchAndPage(productCode: string, page: number, available: boolean = false): Observable<InventoryApiResponse> {
     let params = new HttpParams();
     if (available) params = params.set('available', available.toString());
-    return this.http.get<InventoryApiResponse>(`${this.basePath}/my-search/${productCode}/${page}`, {
+    return this.http.get<InventoryApiResponse>(`${this.basePath}/my-search/${encodeURIComponent(productCode)}/${page}`, {
       params: params,
       headers: {
         'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ export class InventoryService extends BaseService<InventoryApiResponse> {
   countByMyBranchAndProductCode(productCode: string, available: boolean = false): Observable<InventoryApiResponse> {
     let params = new HttpParams();
     if (available) params = params.set('available', available.toString());
-    return this.http.get<InventoryApiResponse>(`${this.basePath}/my-count/code/${productCode}`, {
+    return this.http.get<InventoryApiResponse>(`${this.basePath}/my-count/code/${encodeURIComponent(productCode)}`, {
       params: params,
       headers: {
         'Content-Type': 'application/json',

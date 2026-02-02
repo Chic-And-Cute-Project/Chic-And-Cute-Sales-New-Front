@@ -32,7 +32,7 @@ export class ProductService extends BaseService<ProductApiResponse> {
   }
 
   searchProductByPage(productCode: string, page: number): Observable<ProductApiResponse> {
-    return this.http.get<ProductApiResponse>(`${this.basePath}/search/${productCode}/${page}`, {
+    return this.http.get<ProductApiResponse>(`${this.basePath}/search/${encodeURIComponent(productCode)}/${page}`, {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -40,7 +40,7 @@ export class ProductService extends BaseService<ProductApiResponse> {
   }
 
   countByProductCode(productCode: string): Observable<ProductApiResponse> {
-    return this.http.get<ProductApiResponse>(`${this.basePath}/count/code/${productCode}`, {
+    return this.http.get<ProductApiResponse>(`${this.basePath}/count/code/${encodeURIComponent(productCode)}`, {
       headers: {
         'Content-Type': 'application/json'
       }
