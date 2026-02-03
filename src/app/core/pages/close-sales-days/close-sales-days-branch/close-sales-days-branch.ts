@@ -9,6 +9,8 @@ import {ErrorMessage} from "../../../../shared/models/error-message";
 import {ErrorSnackBar} from "../../../../shared/pages/error-snack-bar/error-snack-bar";
 import {CloseSalesDayService} from "../../../services/close-sales-day/close-sales-day.service";
 import {Router} from "@angular/router";
+import * as jspdf from "jspdf";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-close-sales-days-branch',
@@ -28,7 +30,7 @@ export class CloseSalesDaysBranch implements OnInit {
 
   constructor(private saleService: SaleService, private closeSalesDayService: CloseSalesDayService,
               private snackBar: MatSnackBar, private userAuxService: UserAuxService,
-              private router: Router) {
+              private router: Router, private datePipe: DatePipe) {
     let date = new Date();
     date.setHours(0, 0, 0, 0);
     this.closeSalesDay = {
@@ -91,6 +93,15 @@ export class CloseSalesDaysBranch implements OnInit {
   }
 
   printPdf() {
-
+    let doc = new jspdf.jsPDF({ format: "a7" });
+    doc.setFontSize(10);
+    doc.text(`Vendedor: ${this.userAuxService.getUser().username}`, 5, 10);
+    doc.text(`Sede: ${this.userAuxService.getUser().branch.name}`, 5, 20);
+    doc.text(`Fecha de cierre: ${this.datePipe.transform(new Date(), 'dd/MM/yyyy')}`, 5, 30);
+    doc.text("Reporte de ventas", 37, 40, { align: "center"});
+    doc.text(`Efectivo (${this.cashCount})\t S/.${this.closeSalesDay.cashAmount}`, 5, 50);
+    doc.text(`Visa (${this.cardCount})\t\t S/.${this.closeSalesDay.cardAmount}`, 5, 60);
+    doc.text(`Total \t\t S/.${this.closeSalesDay.totalAmount}`, 5, 70);
+    doc.save('Cierre de caja');
   }
 }

@@ -53,6 +53,7 @@ import { ReportBranch } from './core/pages/report/report-branch/report-branch';
 import { DocumentsPrincipal } from './core/pages/documents/documents-principal/documents-principal';
 import { DocumentsAdmin } from './core/pages/documents/documents-admin/documents-admin';
 import { DocumentsBranch } from './core/pages/documents/documents-branch/documents-branch';
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -114,7 +115,8 @@ import { DocumentsBranch } from './core/pages/documents/documents-branch/documen
     provideHttpClient(),
     provideBrowserGlobalErrorListeners(),
     provideNativeDateAdapter(),
-    { provide: MAT_DATE_LOCALE, useValue: 'es-PE'}
+    { provide: MAT_DATE_LOCALE, useValue: 'es-PE'},
+    DatePipe
   ],
   bootstrap: [App]
 })
