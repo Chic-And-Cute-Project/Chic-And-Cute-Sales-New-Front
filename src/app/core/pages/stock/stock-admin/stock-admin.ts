@@ -11,6 +11,7 @@ import {ErrorMessage} from "../../../../shared/models/error-message";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {UserDto} from "../../../models/user.dto";
 import {UpdateInventoryDialog} from "../../../dialogs/update-inventory-dialog/update-inventory-dialog";
+import * as jspdf from "jspdf";
 
 @Component({
   selector: 'app-stock-admin',
@@ -174,6 +175,103 @@ export class StockAdmin implements OnInit {
       this.searchInventories(0, true);
     } else {
       this.snackBar.open("Código de producto vacío", "Entendido", { duration: 2000});
+    }
+  }
+
+  async printInventory() {
+    try {
+      this.snackBar.open("Generando PDF con inventarios");
+      const inventoryApiResponse = await firstValueFrom(this.inventoryService.getAllByBranch(this.branchSelected));
+      const inventories = inventoryApiResponse.inventories;
+      this.snackBar.dismiss();
+
+      const doc = new jspdf.jsPDF({ format: "a4", unit: "mm" });
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const pageHeight = doc.internal.pageSize.getHeight();
+
+      const branchName =
+        this.branches.find(b => b.id === this.branchSelected)?.name ?? `Sede #${this.branchSelected}`;
+
+      const marginX = 10;
+      const marginTop = 10;
+      const gutter = 4;
+
+      const blocksPerRow = 3;
+
+      const printableWidth = pageWidth - marginX * 2;
+      const blockWidth = (printableWidth - gutter * (blocksPerRow - 1)) / blocksPerRow;
+
+      const codeXOffset = 0;
+      const qtyXOffset = blockWidth - 12;
+
+      const rowHeight = 5;
+      const bottomMargin = 10;
+
+      const header = () => {
+        doc.setFontSize(12);
+        doc.text("Reporte de Inventarios", pageWidth / 2, marginTop, { align: "center" });
+
+        doc.setFontSize(9);
+        doc.text(`Sede: ${branchName}`, marginX, marginTop + 7);
+
+        const y = marginTop + 16;
+
+        for (let c = 0; c < blocksPerRow; c++) {
+          const blockX = marginX + c * (blockWidth + gutter);
+          doc.text("Código", blockX + codeXOffset, y);
+          doc.text("Cant", blockX + qtyXOffset, y, { align: "right" });
+          doc.setLineWidth(0.2);
+          doc.line(blockX, y + 2, blockX + blockWidth, y + 2);
+        }
+
+        return y + 7;
+      };
+
+      let startY = header();
+
+      let currentCol = 0;
+      let y = startY;
+
+      for (const inventory of inventories) {
+        if (y + rowHeight > pageHeight - bottomMargin) {
+          doc.addPage();
+          startY = header();
+          currentCol = 0;
+          y = startY;
+        }
+
+        const blockX = marginX + currentCol * (blockWidth + gutter);
+
+        const code = inventory.product.code ?? "";
+        const qty = String(inventory.quantity ?? "");
+
+        const maxCodeWidth = blockWidth - 16;
+        const codeFitted =
+          doc.getTextWidth(code) <= maxCodeWidth
+            ? code
+            : (() => {
+              let s = code;
+              while (s.length > 0 && doc.getTextWidth(s + "…") > maxCodeWidth) s = s.slice(0, -1);
+              return s.length ? s + "…" : "";
+            })();
+
+        doc.text(codeFitted, blockX + codeXOffset, y);
+        doc.text(qty, blockX + qtyXOffset, y, { align: "right" });
+
+        currentCol += 1;
+        if (currentCol >= blocksPerRow) {
+          currentCol = 0;
+          y += rowHeight;
+        }
+      }
+      doc.save('Inventarios');
+    } catch (error: any) {
+      this.snackBar.openFromComponent(ErrorSnackBar, {
+        data: {
+          messages: error.message
+        },
+        duration: 2000
+      });
     }
   }
 }

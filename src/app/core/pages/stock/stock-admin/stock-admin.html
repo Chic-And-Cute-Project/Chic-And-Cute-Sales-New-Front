@@ -17,6 +17,7 @@
             </button>
         </mat-form-field>
         <button mat-flat-button (click)="searchInventory()" style="background-color: #eae3db; color: #d1ae6f">Buscar</button>
+        <button mat-flat-button (click)="printInventory()" style="background-color: #eae3db; color: #d1ae6f">Imprimir inventario</button>
     </div>
     <div style="overflow: auto; width: 90%; border: solid 1px; border-radius: 15px;">
         <table mat-table [dataSource]="inventories">
