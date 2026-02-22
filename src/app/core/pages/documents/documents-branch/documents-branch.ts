@@ -37,7 +37,11 @@ export class DocumentsBranch implements OnInit {
     this.closeSalesDayService.getAllByMyBranchAndDate(this.minDate, this.maxDate).subscribe({
       next: (response) => {
         this.snackBar.dismiss();
-        this.closeSalesDays = response.closeSalesDays;
+        this.closeSalesDays = response.closeSalesDays.map(closeSalesDay => {
+          closeSalesDay.totalAmount = Number(closeSalesDay.cashAmount) + Number(closeSalesDay.cardAmount);
+          return closeSalesDay;
+        });
+        this.closeSalesDaySelected = {} as CloseSalesDayDto;
       },
       error: (error: ErrorMessage) => {
         this.snackBar.openFromComponent(ErrorSnackBar, {
@@ -54,6 +58,5 @@ export class DocumentsBranch implements OnInit {
     this.closeSalesDaySelected.show = false;
     this.closeSalesDaySelected = closeSalesDay;
     this.closeSalesDaySelected.show = true;
-    this.closeSalesDaySelected.totalAmount = Number(this.closeSalesDaySelected.cashAmount) + Number(this.closeSalesDaySelected.cardAmount);
   }
 }

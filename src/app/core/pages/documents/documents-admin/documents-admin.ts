@@ -58,7 +58,11 @@ export class DocumentsAdmin implements OnInit {
     this.closeSalesDayService.getAllByBranchAndDate(this.branch.id, this.minDate, this.maxDate).subscribe({
       next: (response) => {
         this.snackBar.dismiss();
-        this.closeSalesDays = response.closeSalesDays;
+        this.closeSalesDays = response.closeSalesDays.map(closeSalesDay => {
+          closeSalesDay.totalAmount = Number(closeSalesDay.cashAmount) + Number(closeSalesDay.cardAmount);
+          return closeSalesDay;
+        });
+        this.closeSalesDaySelected = {} as CloseSalesDayDto;
       },
       error: (error: ErrorMessage) => {
         this.snackBar.openFromComponent(ErrorSnackBar, {
@@ -75,6 +79,23 @@ export class DocumentsAdmin implements OnInit {
     this.closeSalesDaySelected.show = false;
     this.closeSalesDaySelected = closeSalesDay;
     this.closeSalesDaySelected.show = true;
-    this.closeSalesDaySelected.totalAmount = Number(this.closeSalesDaySelected.cashAmount) + Number(this.closeSalesDaySelected.cardAmount);
+  }
+
+  deleteDocument() {
+    this.snackBar.open('Eliminando cierre de caja');
+    this.closeSalesDayService.delete(this.closeSalesDaySelected.id).subscribe({
+      next: () => {
+        this.snackBar.dismiss();
+        this.refreshDocuments();
+      },
+      error: (error: ErrorMessage) => {
+        this.snackBar.openFromComponent(ErrorSnackBar, {
+          data: {
+            messages: error.message
+          },
+          duration: 2000
+        });
+      }
+    });
   }
 }

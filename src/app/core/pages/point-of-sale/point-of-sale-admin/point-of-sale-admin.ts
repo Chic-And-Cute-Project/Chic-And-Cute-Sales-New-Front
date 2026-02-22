@@ -196,27 +196,29 @@ export class PointOfSaleAdmin implements OnInit {
     if (!elementExisting) {
       const product: SaleDetailDto = { product: inventoryToAdd.product, productId: inventoryToAdd.product.id, quantity: 1, finalPrice: Number(inventoryToAdd.product.price), limit: inventoryToAdd.quantity } as SaleDetailDto;
       this.sale.detail.push(product);
+      this.sale.finalPrice = this.sale.finalPrice + Number(inventoryToAdd.product.price);
     }
   }
 
   deleteFromArray(i: number) {
+    this.sale.finalPrice = this.sale.finalPrice - this.sale.detail[i].finalPrice;
     this.sale.detail.splice(i, 1);
   }
 
   updateFinalPrice(saleDetail: SaleDetailDto) {
+    this.sale.finalPrice = this.sale.finalPrice - saleDetail.finalPrice;
+
     let price = saleDetail.quantity * Number(saleDetail.product.price);
     if (saleDetail.discount != null) {
       price = price - (price * saleDetail.discount * 0.01);
     }
     saleDetail.finalPrice = Number(price.toFixed(2));
+
+    this.sale.finalPrice = this.sale.finalPrice + saleDetail.finalPrice;
   }
 
   nextStep() {
     if (this.sale.detail.length != 0) {
-      this.sale.detail.forEach(saleDetail => {
-        this.sale.finalPrice = this.sale.finalPrice + saleDetail.finalPrice;
-      });
-      this.sale.finalPrice = Number(this.sale.finalPrice.toFixed(2));
       this.paymentMethods.cashAmount = this.sale.finalPrice;
       this.disableInventoryInput = true;
       this.step = 2;

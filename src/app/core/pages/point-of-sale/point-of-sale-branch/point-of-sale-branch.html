@@ -31,7 +31,8 @@
                     </div>
                 }
             </form>
-            <div style="text-align: center">
+            <div style="display: flex; justify-content: space-between; align-items: center">
+                <p style="margin: 0">Total: S/. {{sale.finalPrice}}</p>
                 <button mat-flat-button [disabled]="!f.form.valid || sale.detail.length === 0" (click)="nextStep()" style="background-color: #eae3db; color: #d1ae6f">Confirmar venta</button>
             </div>
         </div>
@@ -42,7 +43,7 @@
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <mat-form-field appearance="outline" subscriptSizing="dynamic">
                             <mat-label>Código</mat-label>
-                            <input matInput [(ngModel)]="productCode">
+                            <input matInput [(ngModel)]="productCode" (keyup.enter)="searchInventory()">
                             <button mat-icon-button matSuffix (click)="reloadSearch()">
                                 <mat-icon>clear</mat-icon>
                             </button>

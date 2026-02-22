@@ -37,7 +37,7 @@
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <mat-form-field appearance="outline" subscriptSizing="dynamic">
                             <mat-label>Código</mat-label>
-                            <input matInput [(ngModel)]="productCode">
+                            <input matInput [(ngModel)]="productCode" (keyup.enter)="searchInventory()">
                             <button mat-icon-button matSuffix (click)="reloadSearch(false)">
                                 <mat-icon>clear</mat-icon>
                             </button>

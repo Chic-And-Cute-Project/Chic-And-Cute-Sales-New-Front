@@ -40,4 +40,12 @@ export class CloseSalesDayService extends BaseService<CloseSalesDayApiResponse> 
       }
     }).pipe(catchError(this.handleError));
   }
+
+  delete(id: number): Observable<CloseSalesDayApiResponse> {
+    return this.http.delete<CloseSalesDayApiResponse>(`${this.basePath}/${id}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).pipe(catchError(this.handleError));
+  }
 }

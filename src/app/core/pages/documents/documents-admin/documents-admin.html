@@ -30,6 +30,7 @@
                     <p style="margin: 0">Cierre de caja Nro: {{closeSalesDay.id}}</p>
                     <p style="margin: 0">Fecha: {{ closeSalesDay.date | date: 'dd/MM/yyyy' }}</p>
                     <p style="margin: 0">Emitido por: {{closeSalesDay.user.username}}</p>
+                    <p style="margin: 0">Total: S/. {{closeSalesDay.totalAmount}}</p>
                 </div>
             }
         </div>
@@ -54,11 +55,18 @@
                         </div>
                     </div>
                 }
-                <div style="display: flex; flex-direction: column; gap: 8px">
-                    <h3 style="margin: 0">Resumen</h3>
-                    <p style="margin: 0">Efectivo S/. {{closeSalesDaySelected.cashAmount}}</p>
-                    <p style="margin: 0">Visa S/. {{closeSalesDaySelected.cardAmount}}</p>
-                    <p style="margin: 0">Total S/. {{closeSalesDaySelected.totalAmount}}</p>
+                <div style="display: flex; justify-content: space-between;">
+                    <div style="display: flex; flex-direction: column; gap: 8px">
+                        <h3 style="margin: 0">Resumen</h3>
+                        <p style="margin: 0">Efectivo S/. {{closeSalesDaySelected.cashAmount}}</p>
+                        <p style="margin: 0">Visa S/. {{closeSalesDaySelected.cardAmount}}</p>
+                        <p style="margin: 0">Total S/. {{closeSalesDaySelected.totalAmount}}</p>
+                    </div>
+                    <div style="display: flex; align-items: center">
+                        <button mat-icon-button matSuffix (click)="deleteDocument()">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
                 </div>
             </div>
         }
