@@ -20,6 +20,8 @@ import {
 } from "./core/pages/close-sales-days/close-sales-days-principal/close-sales-days-principal";
 import {ReportPrincipal} from "./core/pages/report/report-principal/report-principal";
 import {DocumentsPrincipal} from "./core/pages/documents/documents-principal/documents-principal";
+import {ForgotPassword} from "./superadmin/pages/forgot-password/forgot-password";
+import {tokenAndSuperadminRoleGuard} from "./superadmin/guards/token-and-superadmin-role-guard";
 
 const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noTokenGuard] },
@@ -36,6 +38,8 @@ const routes: Routes = [
   { path: 'users-branches', component: UsersBranches, canActivate: [tokenAndAdminRoleGuard]},
   { path: 'products-discounts', component: ProductsDiscounts, canActivate: [tokenAndAdminRoleGuard]},
   { path: 'remission-guide', component: RemissionGuides, canActivate: [tokenAndAdminRoleGuard]},
+
+  { path: 'forgot-password', component: ForgotPassword, canActivate: [tokenAndSuperadminRoleGuard]},
 
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: PageNotFound }

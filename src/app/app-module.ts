@@ -54,6 +54,8 @@ import { DocumentsPrincipal } from './core/pages/documents/documents-principal/d
 import { DocumentsAdmin } from './core/pages/documents/documents-admin/documents-admin';
 import { DocumentsBranch } from './core/pages/documents/documents-branch/documents-branch';
 import {DatePipe} from "@angular/common";
+import { ForgotPassword } from './superadmin/pages/forgot-password/forgot-password';
+import { ResetPasswordDialog } from './superadmin/dialogs/reset-password-dialog/reset-password-dialog';
 
 @NgModule({
   declarations: [
@@ -91,7 +93,9 @@ import {DatePipe} from "@angular/common";
     ReportBranch,
     DocumentsPrincipal,
     DocumentsAdmin,
-    DocumentsBranch
+    DocumentsBranch,
+    ForgotPassword,
+    ResetPasswordDialog
   ],
   imports: [
     BrowserModule,

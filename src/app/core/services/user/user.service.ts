@@ -46,4 +46,12 @@ export class UserService extends BaseService<UserApiResponse>{
       }
     }).pipe(catchError(this.handleError));
   }
+
+  resetPassword(body: UserDto): Observable<UserApiResponse> {
+    return this.http.put<UserApiResponse>(`${this.basePath}/update/password`, body, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }).pipe(catchError(this.handleError));
+  }
 }
