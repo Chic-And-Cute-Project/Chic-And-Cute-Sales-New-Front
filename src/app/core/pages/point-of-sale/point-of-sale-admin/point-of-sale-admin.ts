@@ -187,17 +187,9 @@ export class PointOfSaleAdmin implements OnInit {
   }
 
   selectProduct(inventoryToAdd: InventoryDto) {
-    let elementExisting = false;
-    this.sale.detail.forEach(saleDetailDto => {
-      if (saleDetailDto.product.id == inventoryToAdd.product.id) {
-        elementExisting = true;
-      }
-    });
-    if (!elementExisting) {
-      const product: SaleDetailDto = { product: inventoryToAdd.product, productId: inventoryToAdd.product.id, quantity: 1, finalPrice: Number(inventoryToAdd.product.price), limit: inventoryToAdd.quantity } as SaleDetailDto;
-      this.sale.detail.push(product);
-      this.sale.finalPrice = this.sale.finalPrice + Number(inventoryToAdd.product.price);
-    }
+    const product: SaleDetailDto = { product: inventoryToAdd.product, productId: inventoryToAdd.product.id, quantity: 1, finalPrice: Number(inventoryToAdd.product.price), limit: inventoryToAdd.quantity } as SaleDetailDto;
+    this.sale.detail.push(product);
+    this.sale.finalPrice = this.sale.finalPrice + Number(inventoryToAdd.product.price);
   }
 
   deleteFromArray(i: number) {
