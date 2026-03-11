@@ -144,4 +144,25 @@ export class UsersBranches implements OnInit {
   selectUser(userDto: UserDto) {
     this.userToUpdate = { ...userDto };
   }
+
+  deleteUser(user: UserDto) {
+    this.snackBar.open('Eliminando usuario');
+    this.userService.delete(user.id).subscribe({
+      next: () => {
+        this.snackBar.dismiss();
+        this.userToUpdate = {
+          branch: {} as BranchDto
+        } as UserDto;
+        this.refreshUsers();
+      },
+      error: (error: ErrorMessage) => {
+        this.snackBar.openFromComponent(ErrorSnackBar, {
+          data: {
+            messages: error.message
+          },
+          duration: 2000
+        });
+      }
+    });
+  }
 }

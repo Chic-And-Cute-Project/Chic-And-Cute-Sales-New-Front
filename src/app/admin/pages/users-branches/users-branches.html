@@ -52,9 +52,16 @@
             @if (users.length == 0) {
                 <p style="margin: 0 0 0 8px; color: #666;">No existen usuarios activos</p>
             } @else {
-                <div style="max-height: 150px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; margin-left: 8px">
+                <div style="max-height: 150px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; margin-left: 8px">
                     @for (user of users; track user.id) {
-                        <p style="cursor: pointer; margin: 0" (click)="selectUser(user)">{{ user.name + " " + user.lastName }}</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <p style="cursor: pointer; margin: 0" (click)="selectUser(user)">{{ user.name + " " + user.lastName }}</p>
+                            <div style="display: flex; align-items: center; margin-right: 10px; margin-bottom: 10px;">
+                                <button mat-icon-button matSuffix (click)="deleteUser(user)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
                     }
                 </div>
             }
@@ -62,9 +69,16 @@
             @if (usersNotActive.length == 0) {
                 <p style="margin: 0 0 8px 8px; color: #666;">No existen usuarios inactivos</p>
             } @else {
-                <div style="max-height: 150px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; margin-bottom: 8px; margin-left: 8px">
+                <div style="max-height: 150px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; margin-left: 8px">
                     @for (user of usersNotActive; track user.id) {
-                        <p style="cursor: pointer; margin: 0" (click)="selectUser(user)">{{ user.name + " " + user.lastName }}</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <p style="cursor: pointer; margin: 0" (click)="selectUser(user)">{{ user.name + " " + user.lastName }}</p>
+                            <div style="display: flex; align-items: center; margin-right: 10px; margin-bottom: 10px;">
+                                <button mat-icon-button matSuffix (click)="deleteUser(user)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
                     }
                 </div>
             }
