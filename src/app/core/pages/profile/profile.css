@@ -1,0 +1,25 @@
+mat-card {
+    background-color: #ffffff;
+}
+
+.tab-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 10px;
+    margin: 10px;
+}
+.sign-out-container {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .tab-content {
+        grid-template-columns: 1fr;
+    }
+    .sign-out-container {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 20px;
+    }
+}

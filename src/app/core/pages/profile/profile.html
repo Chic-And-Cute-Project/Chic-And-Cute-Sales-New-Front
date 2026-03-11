@@ -1,0 +1,54 @@
+<div style="display: flex; flex-direction: column; gap: 16px; align-items: center;">
+    <mat-card style="margin-top: 10px">
+        <mat-card-header style="display: flex; align-items: center;">
+            <div mat-card-avatar style="display: flex; justify-content: center; align-items: center; margin: 0">
+                <mat-icon>person</mat-icon>
+            </div>
+            <mat-card-title>{{ user.name }} {{ user.lastName }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <mat-icon>email</mat-icon>
+                    <span>{{ user.username }}</span>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <mat-tab-group style="width: 90%;" mat-stretch-tabs="false">
+        <mat-tab label="Usuario">
+            <div class="tab-content">
+                <mat-card style="padding: 10px">
+                    <mat-card-title>Información de usuario</mat-card-title>
+                    <mat-divider></mat-divider>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 15px;">
+                        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                            <mat-label>Usuario</mat-label>
+                            <input matInput disabled [(ngModel)]="user.username"/>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput disabled [(ngModel)]="user.name"/>
+                        </mat-form-field>
+                    </div>
+                </mat-card>
+                <mat-card style="padding: 10px">
+                    <mat-card-title>Detalles</mat-card-title>
+                    <mat-divider></mat-divider>
+                    <mat-list>
+                        <mat-list-item>
+                            <mat-icon matListItemIcon>badge</mat-icon>
+                            <div matListItemTitle>Rol</div>
+                            <div matListItemLine>{{ user.role }}</div>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-card>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+    <div class="sign-out-container">
+        <button matButton="filled" (click)="signOut()" style="background-color: #ff6464;">
+            Cerrar sesión
+        </button>
+    </div>
+</div>
