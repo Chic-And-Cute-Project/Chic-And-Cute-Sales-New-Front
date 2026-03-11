@@ -1,0 +1,24 @@
+.container {
+    display: flex;
+    height: 100%;
+}
+.branch-layout-desktop {
+    display: flex;
+    flex-direction: column;
+}
+.branch-layout-mobile {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .container {
+        flex-direction: column;
+    }
+    .branch-layout-desktop {
+        display: none;
+    }
+    .branch-layout-mobile {
+        display: flex;
+        overflow-x: auto;
+    }
+}

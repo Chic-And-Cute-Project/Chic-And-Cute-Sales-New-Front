@@ -11,6 +11,6 @@ export class ReportPrincipal {
   role: string;
 
   constructor(private route: ActivatedRoute) {
-    this.role = this.route.snapshot.params['role'];
+    this.role = this.route.parent?.snapshot.params['role'];
   }
 }

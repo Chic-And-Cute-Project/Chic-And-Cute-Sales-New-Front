@@ -1,24 +1,88 @@
-<div style="display: flex; flex-direction: column; height: 100%">
-    <div style="flex: 1;"></div>
-    <div style="display: flex; flex-direction: column; gap: 16px;">
-        @if (this.user.branch.name !== 'Sin sede asignada') {
-            <h1 style="margin: 0; text-align: center;">Bienvenida</h1>
-            <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
-                <button mat-flat-button [routerLink]="['/point-of-sale', role]" style="margin-right: 10px; background-color: #eae3db; color: #d1ae6f">Punto de Venta</button>
-                <button mat-flat-button [routerLink]="['/stock', role]" style="margin-right: 10px; background-color: #eae3db; color: #d1ae6f">Stock</button>
-                <button mat-flat-button [routerLink]="['/reports', role]" style="margin-right: 10px; background-color: #eae3db; color: #d1ae6f">Reportes</button>
-                <button mat-flat-button [routerLink]="['/close-sales-day', role]" style="background-color: #eae3db; color: #d1ae6f">Cierre de Caja</button>
-                <button mat-flat-button [routerLink]="['/documents', role]" style="margin-right: 10px; background-color: #eae3db; color: #d1ae6f">Documentos</button>
-                <button mat-flat-button [routerLink]="['/stock-reception', role]" style="background-color: #eae3db; color: #d1ae6f">Recepción de Stock</button>
-            </div>
-        } @else {
-            <h1 style="margin: 0; text-align: center;">No estás asignada a una sede</h1>
-            <h1 style="margin: 0; text-align: center;">Contacta con administración si se trata de un error</h1>
-        }
+<div class="container">
+    <div class="branch-layout-desktop" style="background: #ffffff;">
+        <div style="flex: 1; padding: 8px; display: flex; flex-direction: column; gap: 8px;">
+            <button matButton style="justify-content: flex-start; color: #d1ae6f" [routerLink]="['profile']">
+                <mat-icon>person</mat-icon>
+                <span>Perfil</span>
+            </button>
+            <button matButton style="justify-content: flex-start; color: #d1ae6f" [routerLink]="['point-of-sale']">
+                <mat-icon>point_of_sale</mat-icon>
+                <span>Punto de Venta</span>
+            </button>
+            <button matButton style="justify-content: flex-start; color: #d1ae6f" [routerLink]="['stock']">
+                <mat-icon>inventory_2</mat-icon>
+                <span>Stock</span>
+            </button>
+            <button matButton style="justify-content: flex-start; color: #d1ae6f" [routerLink]="['reports']">
+                <mat-icon>bar_chart</mat-icon>
+                <span>Reportes</span>
+            </button>
+            <button matButton style="justify-content: flex-start; color: #d1ae6f" [routerLink]="['close-sales-day']">
+                <mat-icon>request_quote</mat-icon>
+                <span>Cierre de Caja</span>
+            </button>
+            <button matButton style="justify-content: flex-start; color: #d1ae6f" [routerLink]="['documents']">
+                <mat-icon>description</mat-icon>
+                <span>Documentos</span>
+            </button>
+            <button matButton style="justify-content: flex-start; color: #d1ae6f" [routerLink]="['stock-reception']">
+                <mat-icon>move_to_inbox</mat-icon>
+                <span>Recepción de Stock</span>
+            </button>
+        </div>
+        <div style="padding: 12px;">
+            <button matButton="filled" (click)="signOut()" style="background-color: #ff6464; width: 100%;">
+                Cerrar sesión
+            </button>
+        </div>
     </div>
-    <div style="flex: 1; display: flex; justify-content: end; align-items: end">
-        <button matButton="filled" (click)="signOut()" style="background-color: #ff6464; margin: 0 15px 15px 0;">
-            Cerrar Sesión
-        </button>
+    <div style="flex: 1;">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="branch-layout-mobile" style="background: #ffffff;">
+        <div style="display: flex; margin: 10px 0;">
+            <button matButton style="color: #d1ae6f" [routerLink]="['profile']">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-icon>person</mat-icon>
+                    <span>Perfil</span>
+                </div>
+            </button>
+            <button matButton style="color: #d1ae6f" [routerLink]="['point-of-sale']">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-icon>point_of_sale</mat-icon>
+                    <span>POS</span>
+                </div>
+            </button>
+            <button matButton style="color: #d1ae6f" [routerLink]="['stock']">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-icon>inventory_2</mat-icon>
+                    <span>Stock</span>
+                </div>
+            </button>
+            <button matButton style="color: #d1ae6f" [routerLink]="['reports']">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-icon>bar_chart</mat-icon>
+                    <span>Reportes</span>
+                </div>
+            </button>
+            <button matButton style="color: #d1ae6f" [routerLink]="['close-sales-day']">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-icon>request_quote</mat-icon>
+                    <span>CierreCaja</span>
+                </div>
+            </button>
+            <button matButton style="color: #d1ae6f" [routerLink]="['documents']">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-icon>description</mat-icon>
+                    <span>Documentos</span>
+                </div>
+            </button>
+            <button matButton style="color: #d1ae6f" [routerLink]="['stock-reception']">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-icon>move_to_inbox</mat-icon>
+                    <span>RecepciónStock</span>
+                </div>
+            </button>
+        </div>
     </div>
 </div>

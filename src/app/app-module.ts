@@ -56,6 +56,10 @@ import { DocumentsBranch } from './core/pages/documents/documents-branch/documen
 import {DatePipe} from "@angular/common";
 import { ForgotPassword } from './superadmin/pages/forgot-password/forgot-password';
 import { ResetPasswordDialog } from './superadmin/dialogs/reset-password-dialog/reset-password-dialog';
+import { Profile } from './core/pages/profile/profile';
+import {MatCardModule} from "@angular/material/card";
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
@@ -95,7 +99,8 @@ import { ResetPasswordDialog } from './superadmin/dialogs/reset-password-dialog/
     DocumentsAdmin,
     DocumentsBranch,
     ForgotPassword,
-    ResetPasswordDialog
+    ResetPasswordDialog,
+    Profile,
   ],
   imports: [
     BrowserModule,
@@ -113,7 +118,10 @@ import { ResetPasswordDialog } from './superadmin/dialogs/reset-password-dialog/
     MatTableModule,
     MatPaginator,
     MatDatepickerModule,
-    MatCheckbox
+    MatCheckbox,
+    MatCardModule,
+    MatTabsModule,
+    MatListModule
   ],
   providers: [
     provideHttpClient(),

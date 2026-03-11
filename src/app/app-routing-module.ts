@@ -4,11 +4,8 @@ import {PageNotFound} from './shared/pages/page-not-found/page-not-found';
 import {Login} from './security/pages/login/login';
 import {HomePrincipal} from "./core/pages/home/home-principal/home-principal";
 import {noTokenGuard} from "./security/guards/no-token-guard";
-import {tokenAndCorrectRoleGuard} from "./core/guards/token-and-correct-role-guard";
 import {UsersBranches} from "./admin/pages/users-branches/users-branches";
-import {tokenAndAdminRoleGuard} from "./admin/guards/token-and-admin-role-guard";
 import {StockPrincipal} from "./core/pages/stock/stock-principal/stock-principal";
-import {tokenCorrectRoleAndBranchValidatorGuard} from "./core/guards/token-correct-role-and-branch-validator-guard";
 import {ProductsDiscounts} from "./admin/pages/products-discounts/products-discounts";
 import {RemissionGuides} from "./admin/pages/remission-guides/remission-guides";
 import {
@@ -21,25 +18,40 @@ import {
 import {ReportPrincipal} from "./core/pages/report/report-principal/report-principal";
 import {DocumentsPrincipal} from "./core/pages/documents/documents-principal/documents-principal";
 import {ForgotPassword} from "./superadmin/pages/forgot-password/forgot-password";
-import {tokenAndSuperadminRoleGuard} from "./superadmin/guards/token-and-superadmin-role-guard";
+import {tokenGuard} from "./core/guards/token-guard";
+import {correctRoleGuard} from "./core/guards/correct-role-guard";
+import {superadminRoleGuard} from "./superadmin/guards/superadmin-role-guard";
+import {adminRoleGuard} from "./admin/guards/admin-role-guard";
+import {adminOrBranchRoleGuard} from "./core/guards/admin-or-branch-role-guard";
+import {Profile} from "./core/pages/profile/profile";
 
 const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noTokenGuard] },
 
-  { path: 'home/:role', component: HomePrincipal, canActivate: [tokenAndCorrectRoleGuard]},
+  {
+    path: 'home/:role',
+    component: HomePrincipal,
+    canActivate: [tokenGuard],
+    children: [
+      { path: 'profile', component: Profile, canActivate: [correctRoleGuard] },
 
-  { path: 'stock/:role', component: StockPrincipal, canActivate: [tokenCorrectRoleAndBranchValidatorGuard] },
-  { path: 'stock-reception/:role', component: StockReceptionPrincipal, canActivate: [tokenCorrectRoleAndBranchValidatorGuard] },
-  { path: 'point-of-sale/:role', component: PointOfSalePrincipal, canActivate: [tokenCorrectRoleAndBranchValidatorGuard] },
-  { path: 'close-sales-day/:role', component: CloseSalesDaysPrincipal, canActivate: [tokenCorrectRoleAndBranchValidatorGuard] },
-  { path: 'reports/:role', component: ReportPrincipal, canActivate: [tokenCorrectRoleAndBranchValidatorGuard] },
-  { path: 'documents/:role', component: DocumentsPrincipal, canActivate: [tokenCorrectRoleAndBranchValidatorGuard] },
+      { path: 'stock', component: StockPrincipal, canActivate: [correctRoleGuard, adminOrBranchRoleGuard] },
+      { path: 'stock-reception', component: StockReceptionPrincipal, canActivate: [correctRoleGuard, adminOrBranchRoleGuard] },
+      { path: 'point-of-sale', component: PointOfSalePrincipal, canActivate: [correctRoleGuard, adminOrBranchRoleGuard] },
+      { path: 'close-sales-day', component: CloseSalesDaysPrincipal, canActivate: [correctRoleGuard, adminOrBranchRoleGuard] },
+      { path: 'reports', component: ReportPrincipal, canActivate: [correctRoleGuard, adminOrBranchRoleGuard] },
+      { path: 'documents', component: DocumentsPrincipal, canActivate: [correctRoleGuard, adminOrBranchRoleGuard] },
 
-  { path: 'users-branches', component: UsersBranches, canActivate: [tokenAndAdminRoleGuard]},
-  { path: 'products-discounts', component: ProductsDiscounts, canActivate: [tokenAndAdminRoleGuard]},
-  { path: 'remission-guide', component: RemissionGuides, canActivate: [tokenAndAdminRoleGuard]},
+      { path: 'users-branches', component: UsersBranches, canActivate: [correctRoleGuard, adminRoleGuard]},
+      { path: 'products-discounts', component: ProductsDiscounts, canActivate: [correctRoleGuard, adminRoleGuard]},
+      { path: 'remission-guide', component: RemissionGuides, canActivate: [correctRoleGuard, adminRoleGuard]},
 
-  { path: 'forgot-password', component: ForgotPassword, canActivate: [tokenAndSuperadminRoleGuard]},
+      { path: 'forgot-password', component: ForgotPassword, canActivate: [correctRoleGuard, superadminRoleGuard]},
+
+      { path: '', redirectTo: 'profile', pathMatch: 'full' },
+      { path: '**', component: PageNotFound }
+    ]
+  },
 
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: PageNotFound }

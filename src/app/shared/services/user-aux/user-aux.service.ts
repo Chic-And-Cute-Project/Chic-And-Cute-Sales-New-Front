@@ -18,4 +18,8 @@ export class UserAuxService {
   getUserRole(): string {
     return this.user.role;
   }
+
+  signOut() {
+    this.user = {} as UserDto;
+  }
 }

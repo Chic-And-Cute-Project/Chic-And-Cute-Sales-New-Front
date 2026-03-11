@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    height: 100%;
+}
+.superadmin-layout-desktop {
+    display: flex;
+    flex-direction: column;
+}
+.superadmin-layout-mobile {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .container {
+        flex-direction: column;
+    }
+    .superadmin-layout-desktop {
+        display: none;
+    }
+    .superadmin-layout-mobile {
+        display: flex;
+    }
+}
