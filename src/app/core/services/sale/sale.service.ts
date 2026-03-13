@@ -57,4 +57,12 @@ export class SaleService extends BaseService<SaleApiResponse> {
       }
     }).pipe(catchError(this.handleError));
   }
+
+  delete(id: number): Observable<SaleApiResponse> {
+    return this.http.delete<SaleApiResponse>(`${this.basePath}/${id}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).pipe(catchError(this.handleError));
+  }
 }
