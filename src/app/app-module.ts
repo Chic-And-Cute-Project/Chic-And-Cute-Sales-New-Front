@@ -60,6 +60,8 @@ import { Profile } from './core/pages/profile/profile';
 import {MatCardModule} from "@angular/material/card";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatListModule} from "@angular/material/list";
+import { SupplyBranch } from './admin/pages/supply-branch/supply-branch';
+import { IntakeBranch } from './admin/pages/intake-branch/intake-branch';
 
 @NgModule({
   declarations: [
@@ -101,6 +103,8 @@ import {MatListModule} from "@angular/material/list";
     ForgotPassword,
     ResetPasswordDialog,
     Profile,
+    SupplyBranch,
+    IntakeBranch,
   ],
   imports: [
     BrowserModule,

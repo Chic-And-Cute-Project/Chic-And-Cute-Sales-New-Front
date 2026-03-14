@@ -37,6 +37,14 @@
                 <mat-icon>local_shipping</mat-icon>
                 <span>Guía de Remisión</span>
             </button>
+            <button matButton style="justify-content: flex-start; color: #d1ae6f" [routerLink]="['supply-branch']">
+                <mat-icon>swap_horiz</mat-icon>
+                <span>Alimentar Sede</span>
+            </button>
+            <button matButton style="justify-content: flex-start; color: #d1ae6f" [routerLink]="['intake-branch']">
+                <mat-icon>backspace</mat-icon>
+                <span>Consumos</span>
+            </button>
             <button matButton style="justify-content: flex-start; color: #d1ae6f" [routerLink]="['stock-reception']">
                 <mat-icon>move_to_inbox</mat-icon>
                 <span>Recepción de Stock</span>
@@ -105,6 +113,18 @@
                 <div style="display: flex; flex-direction: column; align-items: center;">
                     <mat-icon>local_shipping</mat-icon>
                     <span>GuíaRemisión</span>
+                </div>
+            </button>
+            <button matButton style="color: #d1ae6f" [routerLink]="['supply-branch']">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-icon>swap_horiz</mat-icon>
+                    <span>Alimentar</span>
+                </div>
+            </button>
+            <button matButton style="color: #d1ae6f" [routerLink]="['intake-branch']">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-icon>backspace</mat-icon>
+                    <span>Consumos</span>
                 </div>
             </button>
             <button matButton style="color: #d1ae6f" [routerLink]="['stock-reception']">
