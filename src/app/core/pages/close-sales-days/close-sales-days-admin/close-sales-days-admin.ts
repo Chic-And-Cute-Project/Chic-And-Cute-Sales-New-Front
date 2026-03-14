@@ -125,4 +125,22 @@ export class CloseSalesDaysAdmin implements OnInit {
       doc.save('Cierre de caja');
     }
   }
+
+  deleteSale(sale: SaleDto) {
+    this.snackBar.open('Eliminando venta');
+    this.saleService.delete(sale.id).subscribe({
+      next: () => {
+        this.snackBar.dismiss();
+        this.refreshSales();
+      },
+      error: (error: ErrorMessage) => {
+        this.snackBar.openFromComponent(ErrorSnackBar, {
+          data: {
+            messages: error.message
+          },
+          duration: 2000
+        });
+      }
+    });
+  }
 }

@@ -54,4 +54,12 @@ export class UserService extends BaseService<UserApiResponse>{
       }
     }).pipe(catchError(this.handleError));
   }
+
+  delete(id: number): Observable<UserApiResponse> {
+    return this.http.delete<UserApiResponse>(`${this.basePath}/${id}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).pipe(catchError(this.handleError));
+  }
 }

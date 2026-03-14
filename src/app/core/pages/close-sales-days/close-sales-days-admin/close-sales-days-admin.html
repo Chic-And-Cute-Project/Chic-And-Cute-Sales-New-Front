@@ -32,10 +32,15 @@
                                 </p>
                             }
                         </div>
-                        <div style="display: flex; flex-direction: column; gap: 8px">
-                            @for (paymentMethod of sale.paymentMethod; track paymentMethod.id) {
-                                <p style="margin: 0">{{paymentMethod.type + " S/. " + paymentMethod.amount}}</p>
-                            }
+                        <div style="display: flex; align-items: center; gap: 8px">
+                            <div style="display: flex; flex-direction: column; gap: 8px">
+                                @for (paymentMethod of sale.paymentMethod; track paymentMethod.id) {
+                                    <p style="margin: 0">{{paymentMethod.type + " S/. " + paymentMethod.amount}}</p>
+                                }
+                            </div>
+                            <button mat-icon-button matSuffix (click)="deleteSale(sale)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
                         </div>
                     </div>
                 }
