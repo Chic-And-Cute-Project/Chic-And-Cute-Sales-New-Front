@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {Router} from "@angular/router";
-import {UserDto} from "../../../models/user.dto";
 import {UserAuxService} from "../../../../shared/services/user-aux/user-aux.service";
 
 @Component({
@@ -12,14 +11,11 @@ import {UserAuxService} from "../../../../shared/services/user-aux/user-aux.serv
 export class HomeBranch {
   @Input() role: string = '';
 
-  user: UserDto;
-
-  constructor(private router: Router, private userAuxService: UserAuxService) {
-    this.user = this.userAuxService.getUser();
-  }
+  constructor(private router: Router, private userAuxService: UserAuxService) {}
 
   signOut() {
     localStorage.clear();
+    this.userAuxService.signOut();
     this.router.navigate(['login']).then();
   }
 }

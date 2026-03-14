@@ -1,14 +1,38 @@
-<div style="display: flex; flex-direction: column; height: 100%">
-    <div style="flex: 1;"></div>
-    <div style="display: flex; flex-direction: column; gap: 16px;">
-        <h1 style="margin: 0; text-align: center;">Bienvenido</h1>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
-            <button mat-flat-button [routerLink]="['/forgot-password']" style="background-color: #eae3db; color: #d1ae6f">Reseteo de contraseñas</button>
+<div class="container">
+    <div class="superadmin-layout-desktop" style="background: #ffffff;">
+        <div style="flex: 1; padding: 8px; display: flex; flex-direction: column; gap: 8px;">
+            <button matButton style="justify-content: flex-start; color: #d1ae6f" [routerLink]="['profile']">
+                <mat-icon>person</mat-icon>
+                <span>Perfil</span>
+            </button>
+            <button matButton style="justify-content: flex-start; color: #d1ae6f" [routerLink]="['forgot-password']">
+                <mat-icon>lock</mat-icon>
+                <span>Reseteo de contraseñas</span>
+            </button>
+        </div>
+        <div style="padding: 12px;">
+            <button matButton="filled" (click)="signOut()" style="background-color: #ff6464; width: 100%;">
+                Cerrar sesión
+            </button>
         </div>
     </div>
-    <div style="flex: 1; display: flex; justify-content: end; align-items: end">
-        <button matButton="filled" (click)="signOut()" style="background-color: #ff6464; margin: 0 15px 15px 0;">
-            Cerrar Sesión
-        </button>
+    <div style="flex: 1;">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="superadmin-layout-mobile" style="background: #ffffff;">
+        <div style="display: grid; width: 100%; margin: 10px 0; grid-template-columns: 1fr 1fr;">
+            <button matButton style="color: #d1ae6f" [routerLink]="['forgot-password']">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-icon>lock</mat-icon>
+                    <span>Contraseñas</span>
+                </div>
+            </button>
+            <button matButton style="color: #d1ae6f" [routerLink]="['profile']">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-icon>person</mat-icon>
+                    <span>Perfil</span>
+                </div>
+            </button>
+        </div>
     </div>
 </div>
