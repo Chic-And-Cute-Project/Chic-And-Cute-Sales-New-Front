@@ -196,7 +196,7 @@ export class StockAdmin implements OnInit {
       const marginTop = 10;
       const gutter = 4;
 
-      const blocksPerRow = 3;
+      const blocksPerRow = 2;
 
       const printableWidth = pageWidth - marginX * 2;
       const blockWidth = (printableWidth - gutter * (blocksPerRow - 1)) / blocksPerRow;
@@ -215,6 +215,8 @@ export class StockAdmin implements OnInit {
         doc.text(`Sede: ${branchName}`, marginX, marginTop + 7);
 
         const y = marginTop + 16;
+        const lineTop = y - 4;
+        const lineBottom = pageHeight - bottomMargin;
 
         for (let c = 0; c < blocksPerRow; c++) {
           const blockX = marginX + c * (blockWidth + gutter);
@@ -222,6 +224,12 @@ export class StockAdmin implements OnInit {
           doc.text("Cant", blockX + qtyXOffset, y, { align: "right" });
           doc.setLineWidth(0.2);
           doc.line(blockX, y + 2, blockX + blockWidth, y + 2);
+        }
+
+        if (blocksPerRow > 1) {
+          const separatorX = marginX + blockWidth + gutter / 2;
+          doc.setLineWidth(0.2);
+          doc.line(separatorX, lineTop, separatorX, lineBottom);
         }
 
         return y + 7;
@@ -257,6 +265,8 @@ export class StockAdmin implements OnInit {
 
         doc.text(codeFitted, blockX + codeXOffset, y);
         doc.text(qty, blockX + qtyXOffset, y, { align: "right" });
+        doc.setLineWidth(0.2);
+        doc.line(blockX, y + 2, blockX + blockWidth, y + 2);
 
         currentCol += 1;
         if (currentCol >= blocksPerRow) {
