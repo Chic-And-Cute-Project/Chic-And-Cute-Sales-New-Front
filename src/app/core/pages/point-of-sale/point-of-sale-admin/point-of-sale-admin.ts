@@ -229,7 +229,7 @@ export class PointOfSaleAdmin implements OnInit {
           this.snackBar.open("Colocar monto exacto", "Entendido", {duration: 2000});
         } else {
           this.disablePaymentInput = true;
-          const salePaymentDto: SalePaymentDto = { type: 'EFECTIVO', amount: this.paymentMethods.cashAmount } as SalePaymentDto;
+          const salePaymentDto: SalePaymentDto = { type: 'EFECTIVO', amount: this.sale.finalPrice } as SalePaymentDto;
           this.sale.paymentMethod.push(salePaymentDto);
           this.payedPrice = totalPrice;
           const price = this.payedPrice - this.sale.finalPrice;
