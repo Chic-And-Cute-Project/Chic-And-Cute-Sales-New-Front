@@ -1,12 +1,19 @@
 .content {
     display: grid;
     grid-template-columns: 3fr 2fr;
-    width: 90%;
+    width: 100%;
     gap: 16px;
+}
+
+.supply-branch-info {
+    display: flex;
 }
 
 @media (max-width: 767px) {
     .content {
         grid-template-columns: 1fr;
+    }
+    .supply-branch-info {
+        flex-direction: column;
     }
 }

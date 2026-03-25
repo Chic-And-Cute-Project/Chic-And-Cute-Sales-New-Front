@@ -2,7 +2,7 @@
     <h1 style="margin: 0">Consumo</h1>
     <div class="content">
         <div style="display: flex; flex-direction: column; gap: 16px">
-            <div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                 <mat-form-field appearance="outline" subscriptSizing="dynamic">
                     <mat-label>Sede Origen</mat-label>
                     <mat-select [disabled]="savingIntakeBranch" [(ngModel)]="supplyBranch.branchId">
@@ -10,6 +10,14 @@
                             <mat-option [value]="branch.id" (click)="reloadSearch(true)">{{ branch.name }}</mat-option>
                         }
                     </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                    <mat-label>Identificador</mat-label>
+                    <input [disabled]="savingIntakeBranch" matInput [(ngModel)]="supplyBranch.identifier">
+                </mat-form-field>
+                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                    <mat-label>Mensaje</mat-label>
+                    <input [disabled]="savingIntakeBranch" matInput [(ngModel)]="supplyBranch.comment">
                 </mat-form-field>
             </div>
             <form #f="ngForm" style="display: flex; flex-direction: column; gap: 16px">

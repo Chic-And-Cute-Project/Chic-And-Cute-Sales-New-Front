@@ -1,6 +1,6 @@
-import {SupplyBranch} from "../../pages/supply-branch/supply-branch";
+import {SupplyBranchDto} from "../supply-branch.dto";
 
 export interface SupplyBranchApiResponse {
-  supplyBranch: SupplyBranch;
-  supplyBranches: SupplyBranch[];
+  supplyBranch: SupplyBranchDto;
+  supplyBranches: SupplyBranchDto[];
 }

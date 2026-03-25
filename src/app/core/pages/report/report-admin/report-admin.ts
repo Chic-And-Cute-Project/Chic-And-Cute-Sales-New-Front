@@ -9,6 +9,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {UserService} from "../../../services/user/user.service";
 import {SaleService} from "../../../services/sale/sale.service";
 import {ErrorMessage} from "../../../../shared/models/error-message";
+import {SupplyBranchService} from "../../../../admin/services/supply-branch/supply-branch.service";
+import {SupplyBranchDto} from "../../../../admin/models/supply-branch.dto";
 
 @Component({
   selector: 'app-report-admin',
@@ -27,6 +29,8 @@ export class ReportAdmin implements OnInit {
 
   minDate: Date;
   maxDate: Date;
+  minDateSupply: Date;
+  maxDateSupply: Date;
 
   user: UserDto;
   branch: BranchDto;
@@ -34,19 +38,27 @@ export class ReportAdmin implements OnInit {
   users: UserDto[];
   branches: BranchDto[];
   saleDetails: SaleDetailDto[];
+  supplyBranches: SupplyBranchDto[];
 
   constructor(private branchService: BranchService, private userService: UserService,
-              private saleService: SaleService, private snackBar: MatSnackBar,) {
+              private saleService: SaleService, private supplyBranchService: SupplyBranchService,
+              private snackBar: MatSnackBar,) {
     this.minDate = new Date();
     this.minDate.setHours(0, 0, 0, 0);
     this.maxDate = new Date();
     this.maxDate.setHours(0, 0, 0, 0);
     this.maxDate.setDate(this.maxDate.getDate() + 1);
+    this.minDateSupply = new Date();
+    this.minDateSupply.setHours(0, 0, 0, 0);
+    this.maxDateSupply = new Date();
+    this.maxDateSupply.setHours(0, 0, 0, 0);
+    this.maxDateSupply.setDate(this.maxDateSupply.getDate() + 1);
     this.user = {} as UserDto;
     this.branch = {} as BranchDto;
     this.users = [];
     this.branches = [];
     this.saleDetails = [];
+    this.supplyBranches = [];
   }
 
   async ngOnInit(): Promise<void> {
@@ -77,6 +89,23 @@ export class ReportAdmin implements OnInit {
         this.cardAmount = response.cardAmount;
         this.count = response.count;
         this.totalAmount = this.cashAmount + this.cardAmount;
+      },
+      error: (error: ErrorMessage) => {
+        this.snackBar.openFromComponent(ErrorSnackBar, {
+          data: {
+            messages: error.message
+          },
+          duration: 2000
+        });
+      }
+    });
+  }
+
+  searchSupplyBranch() {
+    this.supplyBranchService.getAllByBranchAndDates(this.branch.id, this.minDate, this.maxDate).subscribe({
+      next: (response) => {
+        this.snackBar.dismiss();
+        this.supplyBranches = response.supplyBranches;
       },
       error: (error: ErrorMessage) => {
         this.snackBar.openFromComponent(ErrorSnackBar, {
