@@ -95,7 +95,7 @@
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
                     @for (supplyBranch of supplyBranches; track supplyBranch.id) {
-                        <div style="background-color: lightgray; padding: 10px; border-radius: 15px; cursor: pointer; display: flex; flex-direction: column; gap: 8px">
+                        <div style="background-color: lightgray; padding: 10px; border-radius: 15px; display: flex; flex-direction: column; gap: 8px">
                             <div class="supply-branch-info">
                                 <p style="margin: 0; min-width: 200px;">{{supplyBranch.type === 'Añadir' ? 'Alimentar sede' : 'Consumo'}} {{supplyBranch.identifier ? 'Nro: ' + supplyBranch.identifier : 'Sin identificador'}}</p>
                                 <span style="width: 24px;"></span>
