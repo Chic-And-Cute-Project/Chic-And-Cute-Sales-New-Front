@@ -83,14 +83,14 @@
                 <form #fPayment="ngForm" style="display: flex; flex-direction: column; gap: 16px; margin-left: 10px">
                     <div>
                         <mat-form-field appearance="outline" subscriptSizing="dynamic">
-                            <mat-label>Monto Efectivo</mat-label>
-                            <input type="number" matInput min="0" [disabled]="disablePaymentInput" [(ngModel)]="paymentMethods.cashAmount" name="cashAmount">
+                            <mat-label>Monto Visa</mat-label>
+                            <input type="number" matInput min="0" [disabled]="disablePaymentInput" [(ngModel)]="paymentMethods.cardAmount" name="cardAmount">
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field appearance="outline" subscriptSizing="dynamic">
-                            <mat-label>Monto Visa</mat-label>
-                            <input type="number" matInput min="0" [disabled]="disablePaymentInput" [(ngModel)]="paymentMethods.cardAmount" name="cardAmount">
+                            <mat-label>Monto Efectivo</mat-label>
+                            <input type="number" matInput min="0" [disabled]="disablePaymentInput" [(ngModel)]="paymentMethods.cashAmount" name="cashAmount">
                         </mat-form-field>
                     </div>
                 </form>

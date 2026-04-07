@@ -10,13 +10,28 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Build Angular
+        run: npm run build
+
+      - name: Deploy a Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CHICANDCUTESALES }}
           channelId: live
           projectId: chicandcutesales
+
       - name: Notificación en Discord
         if: success()
         env:
@@ -24,6 +39,7 @@ jobs:
         uses: Ilshidur/action-discord@master
         with:
           args: "Despliegue exitoso en *chic-frontend*"
+
       - name: Notificación en Discord (fallo)
         if: failure()
         env:

@@ -211,7 +211,7 @@ export class PointOfSaleAdmin implements OnInit {
 
   nextStep() {
     if (this.sale.detail.length != 0) {
-      this.paymentMethods.cashAmount = this.sale.finalPrice;
+      this.paymentMethods.cardAmount = this.sale.finalPrice;
       this.disableInventoryInput = true;
       this.step = 2;
     } else {
