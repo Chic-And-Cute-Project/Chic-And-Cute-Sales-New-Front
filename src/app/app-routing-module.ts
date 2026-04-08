@@ -26,6 +26,7 @@ import {adminOrBranchRoleGuard} from "./core/guards/admin-or-branch-role-guard";
 import {Profile} from "./core/pages/profile/profile";
 import {SupplyBranch} from "./admin/pages/supply-branch/supply-branch";
 import {IntakeBranch} from "./admin/pages/intake-branch/intake-branch";
+import {ManageBranches} from "./superadmin/pages/manage-branches/manage-branches";
 
 const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noTokenGuard] },
@@ -51,6 +52,7 @@ const routes: Routes = [
       { path: 'intake-branch', component: IntakeBranch, canActivate: [correctRoleGuard, adminRoleGuard]},
 
       { path: 'forgot-password', component: ForgotPassword, canActivate: [correctRoleGuard, superadminRoleGuard]},
+      { path: 'manage-branches', component: ManageBranches, canActivate: [correctRoleGuard, superadminRoleGuard]},
 
       { path: '', redirectTo: 'profile', pathMatch: 'full' },
       { path: '**', component: PageNotFound }

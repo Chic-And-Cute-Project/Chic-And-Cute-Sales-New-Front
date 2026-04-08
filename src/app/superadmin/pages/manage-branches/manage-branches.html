@@ -1,0 +1,17 @@
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; gap: 16px">
+    <h1 style="margin: 0">Gestión de Sedes</h1>
+    <div style="width: 90%; text-align: end;">
+        <button mat-flat-button (click)="createBranch()" style="background-color: #eae3db; color: #d1ae6f">Nueva sede</button>
+    </div>
+    <div style="overflow: auto; width: 90%; border: solid 1px; border-radius: 15px;">
+        <table mat-table [dataSource]="branches">
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                <td mat-cell *matCellDef="let branch">{{branch.name}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr style="height: 30px" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>

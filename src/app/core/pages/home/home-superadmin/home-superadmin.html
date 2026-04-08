@@ -9,6 +9,10 @@
                 <mat-icon>lock</mat-icon>
                 <span>Reseteo de contraseñas</span>
             </button>
+            <button matButton style="justify-content: flex-start; color: #d1ae6f" [routerLink]="['manage-branches']">
+                <mat-icon>apartment</mat-icon>
+                <span>Gestión de sedes</span>
+            </button>
         </div>
         <div style="padding: 12px;">
             <button matButton="filled" (click)="signOut()" style="background-color: #ff6464; width: 100%;">
@@ -21,16 +25,22 @@
     </div>
     <div class="superadmin-layout-mobile" style="background: #ffffff;">
         <div style="display: grid; width: 100%; margin: 10px 0; grid-template-columns: 1fr 1fr;">
+            <button matButton style="color: #d1ae6f" [routerLink]="['profile']">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-icon>person</mat-icon>
+                    <span>Perfil</span>
+                </div>
+            </button>
             <button matButton style="color: #d1ae6f" [routerLink]="['forgot-password']">
                 <div style="display: flex; flex-direction: column; align-items: center;">
                     <mat-icon>lock</mat-icon>
                     <span>Contraseñas</span>
                 </div>
             </button>
-            <button matButton style="color: #d1ae6f" [routerLink]="['profile']">
+            <button matButton style="color: #d1ae6f" [routerLink]="['manage-branches']">
                 <div style="display: flex; flex-direction: column; align-items: center;">
-                    <mat-icon>person</mat-icon>
-                    <span>Perfil</span>
+                    <mat-icon>apartment</mat-icon>
+                    <span>Gestión de sedes</span>
                 </div>
             </button>
         </div>

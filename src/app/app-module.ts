@@ -62,6 +62,8 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatListModule} from "@angular/material/list";
 import { SupplyBranch } from './admin/pages/supply-branch/supply-branch';
 import { IntakeBranch } from './admin/pages/intake-branch/intake-branch';
+import { ManageBranches } from './superadmin/pages/manage-branches/manage-branches';
+import { AddBranchDialog } from './superadmin/dialogs/add-branch-dialog/add-branch-dialog';
 
 @NgModule({
   declarations: [
@@ -105,6 +107,8 @@ import { IntakeBranch } from './admin/pages/intake-branch/intake-branch';
     Profile,
     SupplyBranch,
     IntakeBranch,
+    ManageBranches,
+    AddBranchDialog,
   ],
   imports: [
     BrowserModule,
