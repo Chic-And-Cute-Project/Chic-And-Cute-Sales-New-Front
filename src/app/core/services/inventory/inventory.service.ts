@@ -15,8 +15,11 @@ export class InventoryService extends BaseService<InventoryApiResponse> {
     this.basePath = this.basePath + 'inventories';
   }
 
-  getAllByBranch(branchId: number): Observable<InventoryApiResponse> {
+  getAllByBranch(branchId: number, available: boolean = false): Observable<InventoryApiResponse> {
+    let params = new HttpParams();
+    if (available) params = params.set('available', available.toString());
     return this.http.get<InventoryApiResponse>(`${this.basePath}/branch/${branchId}`, {
+      params: params,
       headers: {
         'Content-Type': 'application/json'
       }

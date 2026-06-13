@@ -12,6 +12,7 @@ import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {UserDto} from "../../../models/user.dto";
 import {UpdateInventoryDialog} from "../../../dialogs/update-inventory-dialog/update-inventory-dialog";
 import * as jspdf from "jspdf";
+import {environment} from "../../../../../environment/environment";
 
 @Component({
   selector: 'app-stock-admin',
@@ -181,7 +182,7 @@ export class StockAdmin implements OnInit {
   async printInventory() {
     try {
       this.snackBar.open("Generando PDF con inventarios");
-      const inventoryApiResponse = await firstValueFrom(this.inventoryService.getAllByBranch(this.branchSelected));
+      const inventoryApiResponse = await firstValueFrom(this.inventoryService.getAllByBranch(this.branchSelected, true));
       const inventories = inventoryApiResponse.inventories;
       this.snackBar.dismiss();
 
@@ -283,5 +284,9 @@ export class StockAdmin implements OnInit {
         duration: 2000
       });
     }
+  }
+
+  generateExcel() {
+    window.open(`${environment.apiUrl}inventories/excel-branch/${this.branchSelected}?available=true`, '_blank');
   }
 }
