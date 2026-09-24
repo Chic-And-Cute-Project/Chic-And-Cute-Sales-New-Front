@@ -1,0 +1,44 @@
+<div style="width: min(500px, 90vw);">
+    <h2 mat-dialog-title>Generar recibo</h2>
+    <mat-dialog-content>
+        <div class="tab-content">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Nombre</mat-label>
+                <input matInput [(ngModel)]="data.receipt.name">
+            </mat-form-field>
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Dni</mat-label>
+                <input matInput [(ngModel)]="data.receipt.documentNumber">
+            </mat-form-field>
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Teléfono</mat-label>
+                <input matInput [(ngModel)]="data.receipt.phoneNumber">
+            </mat-form-field>
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Dirección</mat-label>
+                <input matInput [(ngModel)]="data.receipt.address">
+            </mat-form-field>
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Distrito</mat-label>
+                <input matInput [(ngModel)]="data.receipt.district">
+            </mat-form-field>
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Provincia</mat-label>
+                <input matInput [(ngModel)]="data.receipt.province">
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close [disabled]="loading">Cancelar</button>
+        <button matButton="filled" [disabled]="loading" (click)="generateReceipt()">
+            <mat-icon>save</mat-icon>
+            <span>Generar</span>
+        </button>
+        @if (loading) {
+            <div style="margin-left: 8px">
+                <mat-progress-spinner diameter="24" mode="indeterminate"></mat-progress-spinner>
+            </div>
+        }
+    </mat-dialog-actions>
+</div>
+

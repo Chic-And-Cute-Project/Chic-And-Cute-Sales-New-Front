@@ -14,6 +14,10 @@ import {ErrorMessage} from "../../../../shared/models/error-message";
 import {ErrorSnackBar} from "../../../../shared/pages/error-snack-bar/error-snack-bar";
 import {firstValueFrom} from "rxjs";
 import {UserAuxService} from "../../../../shared/services/user-aux/user-aux.service";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {
+  GenerateCustomReceiptDialog
+} from "../../../dialogs/generate-custom-receipt-dialog/generate-custom-receipt-dialog";
 
 @Component({
   selector: 'app-point-of-sale-branch',
@@ -46,9 +50,12 @@ export class PointOfSaleBranch implements OnInit {
   discounts: DiscountDto[];
   inventories: InventoryDto[];
 
+  branchName: string;
+
   constructor(private discountService: DiscountService, private inventoryService: InventoryService,
               private saleService: SaleService, private snackBar: MatSnackBar,
-              private router: Router, private userAuxService: UserAuxService) {
+              private router: Router, private userAuxService: UserAuxService,
+              private dialog: MatDialog) {
     let date = new Date();
     date.setHours(0, 0, 0, 0);
     this.sale = {
@@ -61,6 +68,7 @@ export class PointOfSaleBranch implements OnInit {
     this.paymentMethods = { cardAmount: 0, cashAmount: 0 } as { cashAmount: number, cardAmount: number };
     this.discounts = [];
     this.inventories = [];
+    this.branchName = this.userAuxService.getUser().branch.name;
   }
 
   async ngOnInit(): Promise<void> {
@@ -202,7 +210,7 @@ export class PointOfSaleBranch implements OnInit {
       this.disableInventoryInput = true;
       this.step = 2;
     } else {
-      this.snackBar.open("La venta esta vacia", "Entendido", {duration: 2000});
+      this.snackBar.open("La venta esta vacía", "Entendido", {duration: 2000});
     }
   }
 
@@ -259,5 +267,19 @@ export class PointOfSaleBranch implements OnInit {
         });
       }
     });
+  }
+
+  generateReceipt() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.data = {
+      receipt: {},
+      salesPersonName: this.userAuxService.getUser().name,
+      paymentMethod: this.paymentMethods.cardAmount > 0 && this.paymentMethods.cashAmount > 0 ? 'Visa - Efectivo' : this.paymentMethods.cardAmount > 0 ? 'Visa' : 'Efectivo',
+      detail: this.sale.detail,
+      finalPrice: this.sale.finalPrice
+    };
+
+    this.dialog.open(GenerateCustomReceiptDialog, dialogConfig);
   }
 }
