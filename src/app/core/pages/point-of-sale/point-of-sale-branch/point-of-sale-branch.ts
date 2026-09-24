@@ -18,6 +18,7 @@ import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {
   GenerateCustomReceiptDialog
 } from "../../../dialogs/generate-custom-receipt-dialog/generate-custom-receipt-dialog";
+import {CustomReceiptDto} from "../../../models/custom-receipt.dto";
 
 @Component({
   selector: 'app-point-of-sale-branch',
@@ -51,6 +52,7 @@ export class PointOfSaleBranch implements OnInit {
   inventories: InventoryDto[];
 
   branchName: string;
+  saleSaved: boolean = false;
 
   constructor(private discountService: DiscountService, private inventoryService: InventoryService,
               private saleService: SaleService, private snackBar: MatSnackBar,
@@ -252,10 +254,16 @@ export class PointOfSaleBranch implements OnInit {
     this.savingSale = true;
     this.snackBar.open('Creando venta');
     this.saleService.create(this.sale).subscribe({
-      next: () => {
+      next: (response) => {
         this.savingSale = false;
         this.snackBar.dismiss();
-        this.router.navigate(['/home/BRANCH']).then();
+        if (this.branchName === 'Saga Jockey Plaza') {
+          this.saleSaved = true;
+          this.sale.id = response.sale.id;
+          this.sale.customReceiptNumber = response.customReceiptNumber;
+        } else {
+          this.router.navigate(['/home/BRANCH']).then();
+        }
       },
       error: (error: ErrorMessage) => {
         this.savingSale = false;
@@ -273,13 +281,22 @@ export class PointOfSaleBranch implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.data = {
-      receipt: {},
+      receipt: {
+        saleId: this.sale.id,
+        sequence: this.sale.customReceiptNumber
+      },
       salesPersonName: this.userAuxService.getUser().name,
       paymentMethod: this.paymentMethods.cardAmount > 0 && this.paymentMethods.cashAmount > 0 ? 'Visa - Efectivo' : this.paymentMethods.cardAmount > 0 ? 'Visa' : 'Efectivo',
       detail: this.sale.detail,
       finalPrice: this.sale.finalPrice
     };
 
-    this.dialog.open(GenerateCustomReceiptDialog, dialogConfig);
+    const dialogRef = this.dialog.open(GenerateCustomReceiptDialog, dialogConfig);
+
+    dialogRef.afterClosed().subscribe((result: CustomReceiptDto) => {
+      if (result) {
+        this.router.navigate(['/home/BRANCH']).then();
+      }
+    });
   }
 }

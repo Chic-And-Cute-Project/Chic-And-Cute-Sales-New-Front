@@ -34,6 +34,10 @@
             <mat-icon>save</mat-icon>
             <span>Generar</span>
         </button>
+        <button matButton="filled" [disabled]="loading" (click)="saveReceipt()">
+            <mat-icon>print</mat-icon>
+            <span>Impreso</span>
+        </button>
         @if (loading) {
             <div style="margin-left: 8px">
                 <mat-progress-spinner diameter="24" mode="indeterminate"></mat-progress-spinner>

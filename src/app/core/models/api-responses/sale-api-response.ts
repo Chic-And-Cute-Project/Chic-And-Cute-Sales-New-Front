@@ -10,4 +10,5 @@ export interface SaleApiResponse {
   cardCount: number;
   cashAmount: number;
   cardAmount: number;
+  customReceiptNumber: number;
 }

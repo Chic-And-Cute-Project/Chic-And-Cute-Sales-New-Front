@@ -7,4 +7,6 @@ export interface CustomReceiptDto {
   address: string;
   district: string;
   province: string;
+
+  saleId: number;
 }

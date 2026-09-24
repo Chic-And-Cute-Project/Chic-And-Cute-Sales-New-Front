@@ -100,8 +100,8 @@
                     <p>Total: S/. {{sale.finalPrice}}</p>
                     <p>Vuelto: S/. {{change}}</p>
                     <div style="display: flex; gap: 10px">
-                        <button mat-flat-button [disabled]="payedPrice == 0 || savingSale" (click)="createPayment()" style="margin-bottom: 10px; background-color: #eae3db; color: #d1ae6f">Confirmar pago</button>
-                        @if (payedPrice != 0 && branchName === 'Flore') {
+                        <button mat-flat-button [disabled]="payedPrice == 0 || savingSale || saleSaved" (click)="createPayment()" style="margin-bottom: 10px; background-color: #eae3db; color: #d1ae6f">Confirmar pago</button>
+                        @if (saleSaved && branchName === 'Saga Jockey Plaza') {
                             <button mat-flat-button [disabled]="savingSale" (click)="generateReceipt()" style="margin-bottom: 10px; background-color: #eae3db; color: #d1ae6f">Generar boleta</button>
                         }
                     </div>

@@ -14,4 +14,6 @@ export interface SaleDto {
   branchId: number;
   userId: number;
   finalPrice: number;
+
+  customReceiptNumber: number;
 }
