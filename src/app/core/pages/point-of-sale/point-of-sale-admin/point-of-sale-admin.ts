@@ -15,6 +15,11 @@ import {InventoryService} from "../../../services/inventory/inventory.service";
 import {SalePaymentDto} from "../../../models/sale-payment.dto";
 import {SaleService} from "../../../services/sale/sale.service";
 import {Router} from "@angular/router";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {
+  GenerateCustomReceiptDialog
+} from "../../../dialogs/generate-custom-receipt-dialog/generate-custom-receipt-dialog";
+import {UserAuxService} from "../../../../shared/services/user-aux/user-aux.service";
 
 @Component({
   selector: 'app-point-of-sale-admin',
@@ -48,9 +53,12 @@ export class PointOfSaleAdmin implements OnInit {
   discounts: DiscountDto[];
   inventories: InventoryDto[];
 
+  branchName: string;
+
   constructor(private branchService: BranchService, private discountService: DiscountService,
               private inventoryService: InventoryService, private saleService: SaleService,
-              private snackBar: MatSnackBar, private router: Router) {
+              private snackBar: MatSnackBar, private router: Router,
+              private userAuxService: UserAuxService, private dialog: MatDialog) {
     let date = new Date();
     date.setHours(0, 0, 0, 0);
     this.sale = {
@@ -63,6 +71,7 @@ export class PointOfSaleAdmin implements OnInit {
     this.branches = [];
     this.discounts = [];
     this.inventories = [];
+    this.branchName = '';
   }
 
   async ngOnInit(): Promise<void> {
@@ -70,6 +79,7 @@ export class PointOfSaleAdmin implements OnInit {
       const branchApiResponse = await firstValueFrom(this.branchService.getAllByActive());
       this.branches = branchApiResponse.branches;
       this.sale.branchId = this.branches[0].id;
+      this.branchName = this.branches[0].name;
 
       const discountApiResponse = await firstValueFrom(this.discountService.getAll());
       this.discounts = discountApiResponse.discounts;
@@ -151,6 +161,7 @@ export class PointOfSaleAdmin implements OnInit {
 
   reloadSearch(changeSede: boolean) {
     if (changeSede) {
+      this.branchName = this.branches.find((branch) => branch.id === this.sale.branchId)!.name;
       this.pageIndex = 0;
       this.productCode = "";
       this.snackBar.open("Actualizando");
@@ -215,7 +226,7 @@ export class PointOfSaleAdmin implements OnInit {
       this.disableInventoryInput = true;
       this.step = 2;
     } else {
-      this.snackBar.open("La venta esta vacia", "Entendido", {duration: 2000});
+      this.snackBar.open("La venta esta vacía", "Entendido", {duration: 2000});
     }
   }
 
@@ -272,5 +283,19 @@ export class PointOfSaleAdmin implements OnInit {
         });
       }
     });
+  }
+
+  generateReceipt() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.data = {
+      receipt: {},
+      salesPersonName: this.userAuxService.getUser().name,
+      paymentMethod: this.paymentMethods.cardAmount > 0 && this.paymentMethods.cashAmount > 0 ? 'Visa - Efectivo' : this.paymentMethods.cardAmount > 0 ? 'Visa' : 'Efectivo',
+      detail: this.sale.detail,
+      finalPrice: this.sale.finalPrice
+    };
+
+    this.dialog.open(GenerateCustomReceiptDialog, dialogConfig);
   }
 }
