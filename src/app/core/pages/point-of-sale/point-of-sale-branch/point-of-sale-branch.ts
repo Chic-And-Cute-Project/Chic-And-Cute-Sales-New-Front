@@ -257,7 +257,7 @@ export class PointOfSaleBranch implements OnInit {
       next: (response) => {
         this.savingSale = false;
         this.snackBar.dismiss();
-        if (this.branchName === 'Saga Jockey Plaza') {
+        if (this.branchName === 'Flore') {
           this.saleSaved = true;
           this.sale.id = response.sale.id;
           this.sale.customReceiptNumber = response.customReceiptNumber;
