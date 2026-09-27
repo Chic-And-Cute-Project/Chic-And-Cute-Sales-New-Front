@@ -1,0 +1,22 @@
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; gap: 16px">
+    <h1 style="margin: 0">Asistencias</h1>
+    <div style="width: 90%; display: flex; align-items: center; gap: 8px;">
+        <button mat-flat-button (click)="createAttendance()" style="background-color: #eae3db; color: #d1ae6f">Ingresar Asistencia</button>
+    </div>
+    <div style="overflow: auto; width: 90%; border: solid 1px; border-radius: 15px;">
+        <table mat-table [dataSource]="attendances">
+            <ng-container matColumnDef="createdAt">
+                <th mat-header-cell *matHeaderCellDef> Código de Producto </th>
+                <td mat-cell *matCellDef="let attendance">{{attendance.createdAt | date: 'dd/MM/yyyy hh:mm a'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="branch">
+                <th mat-header-cell *matHeaderCellDef> Precio de Producto </th>
+                <td mat-cell  *matCellDef="let attendance">{{attendance.branch.name}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr style="height: 30px" mat-row *matRowDef="let inventory; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>

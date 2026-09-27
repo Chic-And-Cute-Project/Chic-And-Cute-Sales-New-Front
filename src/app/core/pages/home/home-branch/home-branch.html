@@ -29,6 +29,12 @@
                 <mat-icon>move_to_inbox</mat-icon>
                 <span>Recepción de Stock</span>
             </button>
+            @if (user.branch.isRegistered) {
+                <button matButton style="justify-content: flex-start; color: #d1ae6f" [routerLink]="['attendance']">
+                    <mat-icon>how_to_reg</mat-icon>
+                    <span>Asistencia</span>
+                </button>
+            }
         </div>
         <div style="padding: 12px;">
             <button matButton="filled" (click)="signOut()" style="background-color: #ff6464; width: 100%;">
@@ -83,6 +89,14 @@
                     <span>RecepciónStock</span>
                 </div>
             </button>
+            @if (user.branch.isRegistered) {
+                <button matButton style="color: #d1ae6f" [routerLink]="['attendance']">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <mat-icon>how_to_reg</mat-icon>
+                        <span>Asistencia</span>
+                    </div>
+                </button>
+            }
         </div>
     </div>
 </div>

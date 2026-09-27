@@ -65,6 +65,7 @@ import { IntakeBranch } from './admin/pages/intake-branch/intake-branch';
 import { ManageBranches } from './superadmin/pages/manage-branches/manage-branches';
 import { AddBranchDialog } from './superadmin/dialogs/add-branch-dialog/add-branch-dialog';
 import { GenerateCustomReceiptDialog } from './core/dialogs/generate-custom-receipt-dialog/generate-custom-receipt-dialog';
+import { Attendance } from './branch/pages/attendance/attendance';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { GenerateCustomReceiptDialog } from './core/dialogs/generate-custom-rece
     ManageBranches,
     AddBranchDialog,
     GenerateCustomReceiptDialog,
+    Attendance,
   ],
   imports: [
     BrowserModule,

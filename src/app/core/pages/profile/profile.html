@@ -46,6 +46,11 @@
             </div>
         </mat-tab>
     </mat-tab-group>
+    @if (user.role === 'BRANCH' && !user.branch.isRegistered) {
+        <button matButton="filled" (click)="registerTerminal()">
+            Registrar Terminal
+        </button>
+    }
     <div class="sign-out-container">
         <button matButton="filled" (click)="signOut()" style="background-color: #ff6464;">
             Cerrar sesión
