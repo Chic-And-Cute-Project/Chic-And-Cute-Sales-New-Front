@@ -30,6 +30,7 @@
     "@angular/material": "^20.2.2",
     "@angular/platform-browser": "^20.2.0",
     "@angular/router": "^20.2.0",
+    "@simplewebauthn/browser": "^14.0.0",
     "jspdf": "^4.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
