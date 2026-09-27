@@ -57,7 +57,6 @@ export class Attendance implements OnInit {
     this.attendance.latitude = position.coords.latitude;
     this.attendance.longitude = position.coords.longitude;
     this.attendance.accuracy = position.coords.accuracy;
-    console.log(`Latitude: ${this.attendance.latitude}, Longitude: ${this.attendance.longitude}, Accuracy: ${this.attendance.accuracy}`);
 
     try {
       const response = await firstValueFrom(this.webauthnService.authenticationOptions());
