@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://www.aurumtech.site/chic/',
+    apiUrl: 'https://www.aurumtech.online/chic/',
 };
