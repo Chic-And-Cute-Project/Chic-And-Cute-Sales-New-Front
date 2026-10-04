@@ -34,12 +34,15 @@ export class Attendance implements OnInit {
   }
 
   refreshAttendances() {
+    this.loading = true;
     this.attendanceService.getObject().subscribe({
       next: (response) => {
         this.snackBar.dismiss();
         this.attendances = response.attendances;
+        this.loading = false;
       },
       error: (error: ErrorMessage) => {
+        this.loading = false;
         this.snackBar.openFromComponent(ErrorSnackBar, {
           data: {
             messages: error.message
@@ -57,14 +60,14 @@ export class Attendance implements OnInit {
     this.attendance.latitude = position.coords.latitude;
     this.attendance.longitude = position.coords.longitude;
     this.attendance.accuracy = position.coords.accuracy;
-    console.log(`Latitude: ${this.attendance.latitude}, Longitude: ${this.attendance.longitude}, Accuracy: ${this.attendance.accuracy}`);
 
     try {
       const response = await firstValueFrom(this.webauthnService.authenticationOptions());
       const registrationResponse = await startAuthentication({ optionsJSON: response.options });
 
       await firstValueFrom(this.webauthnService.verifyAuthentication({authenticationResponseJSON: registrationResponse, attendance: this.attendance}));
-      this.loading = false;
+
+      this.refreshAttendances();
       this.snackBar.dismiss();
     } catch (error: any) {
       this.loading = false;
