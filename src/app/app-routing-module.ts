@@ -29,6 +29,7 @@ import {IntakeBranch} from "./admin/pages/intake-branch/intake-branch";
 import {ManageBranches} from "./superadmin/pages/manage-branches/manage-branches";
 import {Attendance} from "./branch/pages/attendance/attendance";
 import {branchRoleGuard} from "./branch/guards/branch-role-guard";
+import {Receipts} from "./admin/pages/receipts/receipts";
 
 const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noTokenGuard] },
@@ -52,6 +53,7 @@ const routes: Routes = [
       { path: 'remission-guide', component: RemissionGuides, canActivate: [correctRoleGuard, adminRoleGuard]},
       { path: 'supply-branch', component: SupplyBranch, canActivate: [correctRoleGuard, adminRoleGuard]},
       { path: 'intake-branch', component: IntakeBranch, canActivate: [correctRoleGuard, adminRoleGuard]},
+      { path: 'custom-receipts', component: Receipts, canActivate: [correctRoleGuard, adminRoleGuard] },
 
       { path: 'attendance', component: Attendance, canActivate: [correctRoleGuard, branchRoleGuard]},
 

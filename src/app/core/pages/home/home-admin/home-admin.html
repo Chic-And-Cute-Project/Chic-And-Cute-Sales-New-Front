@@ -49,6 +49,10 @@
                 <mat-icon>move_to_inbox</mat-icon>
                 <span>Recepción de Stock</span>
             </button>
+            <button matButton style="justify-content: flex-start; color: #d1ae6f" [routerLink]="['custom-receipts']">
+                <mat-icon>receipt_long</mat-icon>
+                <span>Recibos</span>
+            </button>
         </div>
         <div style="padding: 12px;">
             <button matButton="filled" (click)="signOut()" style="background-color: #ff6464; width: 100%;">
@@ -131,6 +135,12 @@
                 <div style="display: flex; flex-direction: column; align-items: center;">
                     <mat-icon>move_to_inbox</mat-icon>
                     <span>RecepciónStock</span>
+                </div>
+            </button>
+            <button matButton style="color: #d1ae6f" [routerLink]="['custom-receipts']">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <mat-icon>receipt_long</mat-icon>
+                    <span>Recibos</span>
                 </div>
             </button>
         </div>
