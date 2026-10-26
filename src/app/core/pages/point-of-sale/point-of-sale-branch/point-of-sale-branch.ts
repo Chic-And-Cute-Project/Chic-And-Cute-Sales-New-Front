@@ -250,6 +250,11 @@ export class PointOfSaleBranch implements OnInit {
     }
   }
 
+  returnToSavePaymentMethods() {
+    this.disablePaymentInput = false;
+    this.payedPrice = 0.00;
+  }
+
   createPayment() {
     this.savingSale = true;
     this.snackBar.open('Creando venta');

@@ -41,6 +41,11 @@
                             <button mat-icon-button matSuffix (click)="deleteSale(sale)">
                                 <mat-icon>delete</mat-icon>
                             </button>
+                            @if (branchName === 'Flore') {
+                                <button mat-icon-button matSuffix (click)="printReceipt(sale)">
+                                    <mat-icon>print</mat-icon>
+                                </button>
+                            }
                         </div>
                     </div>
                 }

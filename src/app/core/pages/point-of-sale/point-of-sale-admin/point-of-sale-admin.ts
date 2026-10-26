@@ -266,6 +266,12 @@ export class PointOfSaleAdmin implements OnInit {
     }
   }
 
+  returnToSavePaymentMethods() {
+    this.disablePaymentInput = false;
+    this.payedPrice = 0.00;
+    this.sale.paymentMethod = [];
+  }
+
   createPayment() {
     this.savingSale = true;
     this.snackBar.open('Creando venta');

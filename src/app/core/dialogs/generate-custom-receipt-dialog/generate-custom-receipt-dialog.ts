@@ -90,6 +90,7 @@ export class GenerateCustomReceiptDialog {
         doc.setFontSize(7);
         doc.text(`Descuento (${detail.discount}%): -S/. ${discountAmount.toFixed(2)}`, 5, currentY);
         currentY += 7;
+        doc.setFontSize(8);
       } else {
         currentY += 3;
       }

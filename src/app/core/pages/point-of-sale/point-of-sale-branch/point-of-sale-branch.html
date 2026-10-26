@@ -32,7 +32,10 @@
                 }
             </form>
             <div style="display: flex; justify-content: space-between; align-items: center">
-                <p style="margin: 0">Total: S/. {{sale.finalPrice}}</p>
+                <div style="display: flex; flex-direction: column; gap: 10px">
+                    <p style="margin: 0">Total: S/. {{sale.finalPrice}}</p>
+                    <p style="margin: 0">Cantidad: {{sale.detail.length}} artículos</p>
+                </div>
                 <button mat-flat-button [disabled]="!f.form.valid || sale.detail.length === 0" (click)="nextStep()" style="background-color: #eae3db; color: #d1ae6f">Confirmar venta</button>
             </div>
         </div>
@@ -95,7 +98,10 @@
                     </div>
                 </form>
                 <div style="margin-left: 10px">
-                    <button mat-flat-button [disabled]="!fPayment.form.valid" (click)="savePaymentMethods()" style="background-color: #eae3db; color: #d1ae6f">Guardar formas de pago</button>
+                    <div style="display: flex; gap: 10px">
+                        <button mat-flat-button [disabled]="!fPayment.form.valid" (click)="savePaymentMethods()" style="background-color: #eae3db; color: #d1ae6f">Guardar formas de pago</button>
+                        <button mat-flat-button [disabled]="!disablePaymentInput" (click)="returnToSavePaymentMethods()" style="background-color: #eae3db; color: #d1ae6f">Volver a formas de pago</button>
+                    </div>
                     <p>Total Pagado: S/. {{payedPrice}}</p>
                     <p>Total: S/. {{sale.finalPrice}}</p>
                     <p>Vuelto: S/. {{change}}</p>

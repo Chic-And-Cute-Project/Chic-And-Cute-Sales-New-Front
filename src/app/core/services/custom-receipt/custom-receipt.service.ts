@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BaseService} from "../../../shared/services/base/base.service";
 import {HttpClient} from "@angular/common/http";
-import {catchError} from "rxjs";
+import {catchError, Observable} from "rxjs";
 import {CustomReceiptApiResponse} from "../../models/api-responses/custom-receipt-api-response";
 import {CustomReceiptDto} from "../../models/custom-receipt.dto";
 
@@ -20,6 +20,14 @@ export class CustomReceiptService extends BaseService<CustomReceiptApiResponse> 
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    }).pipe(catchError(this.handleError));
+  }
+
+  getBySaleId(saleId: number): Observable<CustomReceiptApiResponse> {
+    return this.http.get<CustomReceiptApiResponse>(`${this.basePath}/sale/${saleId}`, {
+      headers: {
+        'Content-Type': 'application/json'
       }
     }).pipe(catchError(this.handleError));
   }

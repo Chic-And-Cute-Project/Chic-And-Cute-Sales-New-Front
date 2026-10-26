@@ -1,7 +1,7 @@
 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; gap: 16px">
     <h1 style="margin: 0">Recibos</h1>
     <div style="width: 90%; display: flex; align-items: center; gap: 8px;">
-        <button mat-flat-button (click)="generateExcel()" style="background-color: #eae3db; color: #d1ae6f">Descargar Word</button>
+        <button mat-flat-button (click)="generateExcel()" style="background-color: #eae3db; color: #d1ae6f">Descargar Excel</button>
     </div>
     <div style="overflow: auto; width: 90%; border: solid 1px; border-radius: 15px;">
         <table mat-table [dataSource]="customReceipts">
