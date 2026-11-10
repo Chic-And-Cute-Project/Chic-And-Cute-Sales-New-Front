@@ -126,6 +126,7 @@ export class CloseSalesDaysBranch implements OnInit {
     this.customReceiptService.getBySaleId(sale.id).subscribe({
       next: async (response) => {
         const pageWidth = 74;
+        let totalQuantity = 0;
 
         const logo = await this.getBase64Image('receipt-logo.png');
         const logoWidth = 30;
@@ -136,6 +137,7 @@ export class CloseSalesDaysBranch implements OnInit {
         currentY += 8 * 9;
         currentY += 9;
         for (const detail of sale.detail) {
+          totalQuantity += detail.quantity;
           currentY += detail.discount > 0 ? 12 : 8;
         }
         currentY += 7;
@@ -192,7 +194,7 @@ export class CloseSalesDaysBranch implements OnInit {
         currentY += 7;
 
         doc.setFontSize(10);
-        doc.text('TOTAL', 5, currentY);
+        doc.text(`TOTAL (${totalQuantity}) productos`, 5, currentY);
         doc.text(`S/. ${sale.finalPrice.toFixed(2)}`, pageWidth - 5, currentY, { align: 'right' });
 
         doc.save('Recibo');

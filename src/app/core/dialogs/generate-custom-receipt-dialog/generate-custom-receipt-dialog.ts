@@ -34,6 +34,7 @@ export class GenerateCustomReceiptDialog {
 
   async generateReceipt() {
     const pageWidth = 74;
+    let totalQuantity = 0;
 
     const logo = await this.getBase64Image('receipt-logo.png');
     const logoWidth = 30;
@@ -45,6 +46,7 @@ export class GenerateCustomReceiptDialog {
     currentY += 9;
     for (const detail of this.data.detail) {
       currentY += detail.discount > 0 ? 12 : 8;
+      totalQuantity += detail.quantity;
     }
     currentY += 7;
     currentY += 20;
@@ -100,7 +102,7 @@ export class GenerateCustomReceiptDialog {
     currentY += 7;
 
     doc.setFontSize(10);
-    doc.text('TOTAL', 5, currentY);
+    doc.text(`TOTAL (${totalQuantity}) productos`, 5, currentY);
     doc.text(`S/. ${this.data.finalPrice.toFixed(2)}`, pageWidth - 5, currentY, { align: 'right' });
 
     doc.save('Recibo');
